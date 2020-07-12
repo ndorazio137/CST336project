@@ -1,0 +1,11 @@
+#game-screen {
+    background: black;
+    width: 80%;
+    height: 80%;
+}
+
+#puzzle {
+    background: white;
+    width: 80%;
+    height: 80%;
+}
