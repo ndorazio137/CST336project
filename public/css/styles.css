@@ -1,0 +1,19 @@
+#sales-grid-container {
+   width: 100%;
+   height: 100vh;
+   border: 2px solid red;
+   border-radius: 5px;
+   display: flex;
+   flex-diraction: column;
+}
+
+#sales-items {
+   width: 100%;
+   height: 100%;
+   border: 2px solid blue;
+   border-radius: 5px;
+}
+
+.item {
+   display: grid;
+}
