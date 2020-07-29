@@ -1,2 +1,2 @@
 # CST336FinalProject
-Puzzle Game
+RPG Store
