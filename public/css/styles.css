@@ -17,3 +17,29 @@
 .item {
    display: grid;
 }
+
+
+
+.blue-box {
+   
+ background-color: #E8FFFF; 
+ padding-left: 40px;
+ padding-right: 40px;
+ padding-top: 40px;
+ padding-bottom: 40px;
+ width: 275px;
+ float: left;
+ display: table;
+ margin-right: 20px;
+ 
+}
+h5 {
+ /*margin-left: 90%;*/
+ margin-top: 80%;
+ display: inline;
+}
+
+p {
+   color: #157DEC;
+   font-size: 15px;
+}
