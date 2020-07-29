@@ -12,6 +12,10 @@ app.get("/potions", function(req, res) {
     res.render("potions.ejs");
 });
 
+app.get("/weapons", function(req, res) {
+    res.render("weapons.ejs");
+});
+
 // starting server
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("Express server is running...");
