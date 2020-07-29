@@ -1,2 +1,2 @@
-# CST336FinalProject
+# CST336project
 RPG Store
