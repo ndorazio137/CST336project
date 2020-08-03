@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-app.engine('html', require('ejs').renderFile);
+const pool = require("./dbPool.js");
+app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 //routes
