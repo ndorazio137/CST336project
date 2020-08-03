@@ -1,47 +1,58 @@
+<!-- Document includes its own header and footer 
+to be different from sites navbar -->
 <!DOCTYPE html>
 <html lang="en-US">
 
-    <head>
-        <title>
-            Team 7: CCPC: Final Project "The Sourcerer's Source"
-        </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    </head>
+   <head>
+      <title>
+         Team 7: CCPC: Final Project "The Sourcerer's Source"
+      </title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
  
-    <body>
-        <div>
+   <body>
+        
+      <!-- a container for signup display -->
+      <div>
+            
+         <!-- add the brand logo here -->
+            
+         <!-- an inner container for the form -->
+         <div>
+                
             <h1> Create your user account </h1>
-            <div>
+            <br />
+            <form action="/signup">
+               <label for="firstname">First name </label>
+                  <input type="text" name="firstName" 
+                     placeholder="Enter First Name">
+               <br />
+               <label for="lastname">Last name </label>
+                  <input type="text" name="lastName" 
+                     placeholder="Enter Last Name">
+               <br />
+               <label for="email">Email </label>
+                  <input type="text" name="email" 
+                     placeholder="Enter Email Address">
+               <br />
+               <label for="username">Username </label> 
+                  <input id="username" type="text" name="username"
+                     placeholder="Enter a Username">
+               <br />
+               <label for="password">Password </label> 
+                  <input id="password" type="password" name="password" 
+                     placeholder="Enter a Password">
+               <br />
+               <label for="passwordAgain">Re-enter password </label> 
+                  <input id="passwordAgain" type="password" name="passwordAgain" 
+                     placeholder="Verify Password"/>
+               <br />
+               <br />
+               <button type="submit"> Sign Up </button>
+            </form> 
                 
-                <form action="/signup">
-                    <label for="firstname">First name </label>
-                        <input type="text" name="firstName" placeholder="Enter First Name">
-                    <br />
-                    <label for="lastname">Last name </label>
-                        <input type="text" name="lastName" placeholder="Enter Last Name">
-                    <br />
-                    <label for="email">Email </label>
-                        <input type="text" name="email" placeholder="Enter Email Address">
-                    <br />
-                    <label for="username">Username </label> 
-                        <input id="username" type="text" name="username"
-                            placeholder="Enter a Username">
-                    <br />
-                    <label for="password">Password </label> 
-                        <input id="password" type="password" name="password" 
-                            placeholder="Enter a Password">
-                    <br />
-                    <label for="passwordAgain">Re-enter password </label> 
-                        <input id="passwordAgain" type="password" name="passwordAgain" 
-                            placeholder="Verify Password"/>
-                    <br />
-                    <br />
-                    <button type="submit"> Sign Up </button>
-                </form> 
-                
-            </div>
-        </div>
+         </div> <!-- end inner container -->
+      </div> <!-- end signup display container -->
 
-    </body>
+   </body>
 </html>

@@ -25,6 +25,10 @@ app.get("/signup", function(req, res) {
     res.render("signup.ejs");
 });
 
+app.get("/shoppingcart", function(req, res) {
+    res.render("shoppingcart.ejs");
+});
+
 // starting server
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("Express server is running...");

@@ -18,10 +18,7 @@
    display: grid;
 }
 
-
-
 .blue-box {
-   
  background-color: #E8FFFF; 
  padding-left: 40px;
  padding-right: 40px;
@@ -31,8 +28,8 @@
  float: left;
  display: table;
  margin-right: 20px;
- 
 }
+
 h5 {
  /*margin-left: 90%;*/
  margin-top: 80%;
@@ -49,3 +46,26 @@ h1 {
   font-family: cursive;
     
 }
+
+
+
+
+/****** shoppingcart css starts here **********/
+#shoppingcart {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.remove-cart-item-btn {
+    background-color: rgb(200,0,0); /*red*/
+    border-radius: 25px; /*circular button*/
+    color: white; /*icon color*/
+    padding: 12px 16px;
+    font-size: 16px;
+}
+
+.remove-cart-item-btn:hover {
+    background-color: rgb(175,0,0); /*purplish red*/
+    color: black; /*icon color*/
+}
+/****** shoppingcart css ends here ********/
