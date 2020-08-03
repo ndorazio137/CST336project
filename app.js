@@ -16,6 +16,14 @@ app.get("/weapons", function(req, res) {
     res.render("weapons.ejs");
 });
 
+app.get("/login", function(req, res) {
+    res.render("login.ejs");
+});
+
+app.get("/signup", function(req, res) {
+    res.render("signup.ejs");
+});
+
 // starting server
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("Express server is running...");
