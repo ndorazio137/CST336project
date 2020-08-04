@@ -22,8 +22,8 @@
          <nav class="navbar navbar-light bg-light flex-direction-column">
             <!-- Nav links -->
             <ul class="nav">
-               <!-- Store brand and Name -->
                <!-- Page links -->
+               <!-- Store brand and Name -->
                <li class="nav-item">
                   <a class="navbar-brand" href="/">
                      <img src="img/wizard_hat.png" width="30" height="30" 
@@ -32,27 +32,39 @@
                         The Sourcerer's Source
                   </a>
                </li>
+               <!-- Potions page link -->
                <li>
                   <a class="nav-link" href="/potions">Potions</a>
                </li>
+               <!-- Weapons page link -->
                <li class="nav-item">
                   <a class="nav-link" href="/weapons">Weapons</a>
                </li>
+               <!-- Armor page link -->
                <li class="nav-item">
-                  <a class="nav-link" href="#">Armor</a>
+                  <a class="nav-link" href="/armor">Armor</a>
                </li>
+               <!-- Wands page link -->
                <li class="nav-item">
-                  <a class="nav-link" href="#">Wands/Crystals</a>
+                  <a class="nav-link" href="/wands">Wands</a>
+               </li>
+               <!-- Crystals  page link -->
+               <li class="nav-item">
+                  <a class="nav-link" href="/crystals">Crystals</a>
                </li>
                
                <!-- Search field and button -->
                <li>
-               <form class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="search" 
-                     placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" 
-                     type="submit">Search</button>
-               </form>
+                  <form action="/search" class="form-inline my-2 my-lg-0">
+                     <div class="btn-group" id="search" role="group" 
+                        aria-label="Button group with nested search icon and search text bar">
+                        <button class="btn my-2 my-sm-0" id="search-btn"
+                           type="submit"><i><img src="img/search.png" width="30" height="30" 
+                                 class="d-inline-block align-top" alt="search icon"></i></button>
+                        <input class="form-control mr-sm-2" id="search-text-box" type="search" 
+                           placeholder="Search" aria-label="Search">
+                     </div>
+                  </form>
                </li>
                
                <!-- login section --> <!-- Change to a button -->

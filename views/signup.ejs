@@ -1,14 +1,4 @@
-<!-- Document includes its own header and footer 
-to be different from sites navbar -->
-<!DOCTYPE html>
-<html lang="en-US">
-
-   <head>
-      <title>
-         Team 7: CCPC: Final Project "The Sourcerer's Source"
-      </title>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
+<%- include('partials/login&signup_header.ejs') %>
  
    <body>
         
@@ -25,19 +15,19 @@ to be different from sites navbar -->
          <div>
             
             <!-- sign up form -->
-            <form action="/signup">
+            <form action="/">
                <h1> Create your user account </h1>
                <br />
                <!-- First name -->
                <img src="img/add_user.png" width="30" height="30" 
                      class="d-inline-block align-top" alt="lock outline">
-               <input type="text" name="firstName" 
+               <input type="text" name="first-name" 
                      placeholder="Enter First Name">
                <br />
                <!-- Last name -->
                <img src="img/add_user.png" width="30" height="30" 
                      class="d-inline-block align-top" alt="lock outline">
-               <input type="text" name="lastName" 
+               <input type="text" name="last-name" 
                      placeholder="Enter Last Name">
                <br />
                <!-- Email -->
@@ -49,19 +39,19 @@ to be different from sites navbar -->
                <!-- Username -->
                <img src="img/add_user.png" width="30" height="30" 
                      class="d-inline-block align-top" alt="lock outline">
-               <input id="username" type="text" name="username"
+               <input id="signup-username" type="text" name="signup-username"
                      placeholder="Enter a Username">
                <br />
                <!-- Password -->
                <img src="img/lock.png" width="30" height="30" 
                      class="d-inline-block align-top" alt="lock outline">
-               <input id="password" type="password" name="password" 
+               <input id="signup-password" type="password" name="signup-password" 
                      placeholder="Enter a Password">
                <br />
                <!-- Verify password -->
                <img src="img/lock.png" width="30" height="30" 
                      class="d-inline-block align-top" alt="lock outline">
-               <input id="passwordAgain" type="password" name="passwordAgain" 
+               <input id="password-again" type="password" name="password-again" 
                      placeholder="Verify Password"/>
                <br />
                <br />

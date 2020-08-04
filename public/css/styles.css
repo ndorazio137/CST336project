@@ -47,11 +47,9 @@ h1 {
     
 }
 
-
-
-
 /****** shoppingcart css starts here **********/
-#shoppingcart {
+
+#shopping-cart {
     border: 1px solid black;
     border-radius: 10px;
 }
@@ -68,4 +66,5 @@ h1 {
     background-color: rgb(175,0,0); /*purplish red*/
     color: black; /*icon color*/
 }
+
 /****** shoppingcart css ends here ********/
