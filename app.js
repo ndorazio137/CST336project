@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-app.engine('html', require('ejs').renderFile);
+const pool = require("./dbPool.js");
+app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 //routes
@@ -14,6 +15,18 @@ app.get("/potions", function(req, res) {
 
 app.get("/weapons", function(req, res) {
     res.render("weapons.ejs");
+});
+
+app.get("/login", function(req, res) {
+    res.render("login.ejs");
+});
+
+app.get("/signup", function(req, res) {
+    res.render("signup.ejs");
+});
+
+app.get("/shoppingcart", function(req, res) {
+    res.render("shoppingcart.ejs");
 });
 
 // starting server

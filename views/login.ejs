@@ -1,0 +1,61 @@
+<!-- Document includes its own header and footer 
+to be different from sites navbar -->
+<!DOCTYPE html>
+<html lang="en-US">
+
+   <head>
+      <title>
+         Team 7: CCPC: Final Project "The Sourcerer's Source"
+      </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+  
+   <body>
+        
+      <!-- a container for login display -->
+      <div>
+         
+         <!-- Brand logo -->
+         <a class="form-logo" href="/">
+            <img src="img/wizard_hat.png" width="60" height="60" 
+               class="d-inline-block align-top" alt="The Sourcerer's Source brand logo">
+         </a>
+            
+         <!-- an inner container for the form -->
+         <div>
+               
+            <!-- login form -->
+            <form action="/login">
+               <h1> Log in to your account </h1>
+               <br />
+               <!-- User name -->
+               <div>
+                  <img src="img/user.png" width="30" height="30" 
+                     class="d-inline-block align-top" alt="person outline">
+                  <input id="username" type="text" name="username"
+                     placeholder="Enter a Username">
+               </div>
+               <!-- password -->
+               <div>
+                  <img src="img/lock.png" width="30" height="30" 
+                     class="d-inline-block align-top" alt="lock outline">
+                  <input id="password" type="password" name="password" 
+                     placeholder="Enter a Password">
+               </div>
+               <br />
+               <br />
+               <!-- submit form -->
+               <button type="submit"> Log In </button>
+               <br>  
+               <!-- redirect to create a new account -->
+               <p>
+                  New to The Sourcerer's Source? 
+                  <a href="/signup">Create an account.</a> 
+               </p>
+            </form> <!-- login form ends -->
+            
+         </div> <!-- end inner container -->
+      </div> <!-- end login display container -->
+        
+   </body>
+</html>
