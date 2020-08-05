@@ -63,6 +63,14 @@ app.get("/thankyou", function(req, res) {
    res.render("thankyou.ejs");
 });
 
+// sql database path route. SQL statement goes here.
+
+//store signup info
+
+//store recepit
+
+//search for login existing user
+
 // starting server
 app.listen(process.env.PORT, process.env.IP, function() {
    console.log("Express server is running...");
