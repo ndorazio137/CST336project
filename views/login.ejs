@@ -1,4 +1,4 @@
-<%- include('partials/login&signup_header.ejs') %>
+   <%- include('partials/login&signup_header.ejs') %>
   
    <body>
         
@@ -15,30 +15,34 @@
          <div>
                
             <!-- login form -->
-            <form action="/">
+            <form method="POST">
                <h1> Log in to your account </h1>
                <br />
                <!-- User name -->
                <div>
                   <img src="img/user.png" width="30" height="30" 
                      class="d-inline-block align-top" alt="person outline">
-                  <input id="login-username" type="text" name="login-username"
+                  <input type="text" name="username"
                      placeholder="Enter a Username">
                </div>
                <!-- password -->
                <div>
                   <img src="img/lock.png" width="30" height="30" 
                      class="d-inline-block align-top" alt="lock outline">
-                  <input id="login-password" type="password" name="login-password" 
+                  <input type="password" name="password" 
                      placeholder="Enter a Password">
                </div>
                <br />
                <br />
                <!-- submit form -->
-               <button type="submit"> Log In </button>
+               <input id="loginButton"type="submit" value="Log In" />
                <br>  
             </form> <!-- login form ends -->
             
+            <% if (typeof loginError != "undefined" && loginError) { %>
+               <h3 class="error"> Wrong Credentials! </h3>
+            <% }%>
+             
             <!-- redirect to create a new account -->
             <p>
                New to The Sourcerer's Source? 
@@ -47,6 +51,7 @@
             
          </div> <!-- end inner container -->
       </div> <!-- end login display container -->
-        
+       
+   <%- include('partials/footer.ejs') %>
    </body>
 </html>
