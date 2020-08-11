@@ -4,10 +4,10 @@ const mysql = require('mysql');
 // KYLE: please change to real database when ready!
 const pool = mysql.createPool({
     connectionLimit: 10,
-    host: "rnr56s6e2uk326pj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    user: "e2ixdlaj1rh29g8c",
-    password: "kl48kn2bpr9az7bg",
-    database: "fgnom3yhwunht73d"
+    host: "u28rhuskh0x5paau.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    user: "xm4m5ktv0aw09ru9",
+    password: "uw6a2g99gu0qrvya",
+    database: "hqa04g4sl9lm5mu3"
 });
 
 module.exports = pool;

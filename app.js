@@ -22,22 +22,45 @@ app.use(express.urlencoded({ extended: true }));
 
 //routes
 app.get("/", function(req, res) {
+   res.render("index");
+});
+
+app.get("/login", function(req, res) {
    res.render("login");
 });
 
-app.post("/", function(req, res) {
+app.post("/login", async function(req, res) {
    let username = req.body.username;
    let password = req.body.password;
    console.log("USERNAME: " + username);
    console.log("PASSWORD: " + password);
+   let hashedPwd = "$2a$10$AjnC509IqVfhQ06xYuOzQ.F1CSVAh7Fh4pGviPO3nd3glLvyX0Kg2";
+
+   let passwordMatch = await checkPassword(password, hashedPwd);
+   console.log("passwordMatch: " + passwordMatch.toString());
    //*******This is commented out for easy access to other pages while building*****//
-   //****Do not delete. It will be used ******//
-   // if (username == "admin" && password == "secret") {
-   res.render("admin");
-   // }
-   // else {
-   //    res.render("login", { "loginError": true });
-   // }
+   //** Do not delete.It will be used ** ** ** //
+   if (username == "admin" && passwordMatch) {
+      req.session.authenticated = true;
+      res.render("admin");
+   }
+   else {
+      res.render("login", { "loginError": true });
+   }
+});
+
+app.get("/myAccount", isAuthenticated, function(req, res) {
+   if (req.session.authenticated) {
+      res.render("account");
+   }
+   else {
+      res.redirect("login");
+   }
+});
+
+app.get("/logout", function(req, res) {
+   req.session.destroy();
+   res.redirect("/");
 });
 
 app.get("/potions", function(req, res) {
@@ -76,6 +99,25 @@ app.get("/thankyou", function(req, res) {
    res.render("thankyou");
 });
 
+//additional helper functions
+function checkPassword(password, hashedValue) {
+   return new Promise(function(resolve, reject) {
+      bcrypt.compare(password, hashedValue, function(err, result) {
+         console.log("Result: " + result.toString());
+         resolve(result);
+      });
+   });
+}
+
+function isAuthenticated(req, res, next) {
+   if (!req.session.authenticated) {
+      res.redirect("account");
+   }
+   else {
+      next();
+   }
+}
+
 // unfinished search
 app.get("/search", function(req, res) {
 
@@ -98,6 +140,10 @@ app.get("/search", function(req, res) {
 //search for login existing user
 
 //listener
-app.listen(8080, "0.0.0.0", function() {
-   console.log("Running Express Server...");
+app.listen(process.env.PORT, process.env.IP, function() {
+   console.log("Express server is running...");
 });
+
+// app.listen(8080, "0.0.0.0", function() {
+//    console.log("Running Express Server...");
+// });
