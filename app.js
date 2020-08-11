@@ -140,10 +140,10 @@ app.get("/search", function(req, res) {
 //search for login existing user
 
 //listener
-app.listen(process.env.PORT, process.env.IP, function() {
-   console.log("Express server is running...");
-});
-
-// app.listen(8080, "0.0.0.0", function() {
-//    console.log("Running Express Server...");
+// app.listen(process.env.PORT, process.env.IP, function() {
+//    console.log("Express server is running...");
 // });
+
+app.listen(process.env.PORT || 8080, "0.0.0.0", function() {
+   console.log("Running Express Server...");
+});
