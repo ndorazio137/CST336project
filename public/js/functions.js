@@ -16,7 +16,7 @@ $(document).ready(function() {
       let div = document.createElement("div");
       div.setAttribute("class", "box blue-box product-container");
 
-      //<form></form>
+      //<form action="/addToCart" method="POST"></form>
       let form = document.createElement("form");
 
       //<img src=image> 

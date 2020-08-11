@@ -1,8 +1,104 @@
    <%- include('partials/header.ejs') %>
    <%- include('partials/navbar.ejs') %>
 
-      <p> DEV NOTE: Admin needs to be implemented </p>
-
+    <!-- Admin Add Item Container -->
+   <div id="adminAdd" class="admin-option admin-option-positive">
+      <h5> Add a Product </h5>
+      <!-- Admin Add Item Form -->
+      <form action="/addProduct" method="POST">
+         <!-- product name -->
+         <label for="product_name" class="required_input"> Product Name: </label>
+         <input type="text" name="product_name" placeholder="Product name" required>
+         <br />
+         <!-- product category -->
+         <label for="product_category" class="required_input"> Product Category: </label>
+         <input type="text" name="product_category" placeholder="Product category" required>
+         <br />
+         <!-- product price -->
+         <label for="product_price" class="required_input"> Set a Price: </label>
+         <input type="text" name="product_price" placeholder="Product price" required>
+         <br />
+         <!-- product quantity -->
+         <label for="product_quantity" class="required_input"> Quantity to Add: </label>
+         <input type="text" name="product_quantity" placeholder="Product quantity" required>
+         <br />
+         <!-- product image -->
+         <label for="product_image"> Add a product Image by URL: </label>
+         <input type="text" name="product_image" placeholder="Product image url">
+         <br />
+         <br />
+         <!-- product description -->
+         <textarea name="product_description" rows="4" columns="30" placeholder="Add a description"></textarea>
+         <br />
+         <br />
+         <!-- submit form -->
+         <input class="btn btn-primary btn-lg" type="submit" />
+      </form> <!-- admin add item form ends here -->
+   </div> <!--add add item container ends here -->
+   
+   <br />
+   <br />
+   
+   <!-- Admin Update Item Container-->
+   <div id="adminUpdate" class="admin-option admin-option-positive">
+      <h5> Update a Product </h5>
+      <!-- Admin Update Item Form -->
+      <form action="/updateProduct" method="POST">
+         <!-- product name -->
+         <label for="product_name" class="required_input"> Product Name: </label>
+         <input type="text" name="product_name" placeholder="Product name" required>
+         <br />
+         <!-- product category -->
+         <label for="product_category"> Product Category: </label>
+         <input type="text" name="product_category" placeholder="Product category">
+         <br />
+         <!-- product price -->
+         <label for="product_price"> Set a Price: </label>
+         <input type="text" name="product_price" placeholder="Product price">
+         <br />
+         <!-- product quantity -->
+         <label for="product_quantity"> Quantity to Add: </label>
+         <input type="text" name="product_quantity" placeholder="Product quantity">
+         <br />
+         <!-- product image -->
+         <label for="product_image"> Add a product Image by URL: </label>
+         <input type="text" name="product_image" placeholder="Product image url">
+         <br />
+         <br />
+         <!-- product description -->
+         <textarea name="product_description" rows="4" columns="30" placeholder="Updated description"></textarea>
+         <br />
+         <br />
+         <!-- submit form -->
+         <input class="btn btn-primary btn-lg" type="submit"/>
+      </form> <!-- admin update item form ends here -->
+   </div> <!-- admin update item container ends here -->
+   
+   <br />
+   <br />
+   <br />
+   
+   <!-- Admin Delete Item Container -->
+   <div id="adminDelete" class="admin-option admin-option-negative">
+      <h5> Delete a Product </h5>
+      <!-- Admin Delete Item Form -->
+      <form action="/deleteProduct" method="POST">
+         <!-- product name -->
+         <label for="product_name" class="required_input"> Product Name: </label>
+         <input type="text" class="required_input" name="product_name" placeholder="Product name" required>
+         <br />
+         <br />
+         <!-- danger alert bar -->
+         <div class="alert alert-danger" role="alert">
+            Danger: This action can not be undone!
+            <br />
+            <br />
+            <!-- submit form -->
+            <input class="btn btn-danger btn-md" type="submit"/>
+         </div>
+      </form> <!-- admin delete item form ends here-->
+   </div> <!-- admin delete item container ends here -->
+   
    <%- include('partials/footer.ejs') %>
    </body>
 </html>

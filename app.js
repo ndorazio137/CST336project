@@ -5,7 +5,7 @@ const pool = require("./dbPool.js");
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 
-// 
+// express app
 const app = express();
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -40,14 +40,32 @@ app.post("/login", async function(req, res) {
    console.log("passwordMatch: " + passwordMatch.toString());
    //*******This is commented out for easy access to other pages while building*****//
    //** Do not delete.It will be used ** ** ** //
-   if (username == "admin" && passwordMatch) {
-      req.session.authenticated = true;
-      res.render("admin");
+   // if (username == "admin" && passwordMatch) {
+   //    req.session.authenticated = true;
+   res.render("admin");
+   // }
+   // else {
+   //    res.render("login", { "loginError": true });
+   // }
+});
+
+function checkPassword(password, hashedValue) {
+   return new Promise(function(resolve, reject) {
+      bcrypt.compare(password, hashedValue, function(err, result) {
+         console.log("Result: " + result.toString());
+         resolve(result);
+      });
+   });
+}
+
+function isAuthenticated(req, res, next) {
+   if (!req.session.authenticated) {
+      res.redirect("account");
    }
    else {
-      res.render("login", { "loginError": true });
+      next();
    }
-});
+}
 
 app.get("/myAccount", isAuthenticated, function(req, res) {
    if (req.session.authenticated) {
@@ -99,24 +117,10 @@ app.get("/thankyou", function(req, res) {
    res.render("thankyou");
 });
 
-//additional helper functions
-function checkPassword(password, hashedValue) {
-   return new Promise(function(resolve, reject) {
-      bcrypt.compare(password, hashedValue, function(err, result) {
-         console.log("Result: " + result.toString());
-         resolve(result);
-      });
-   });
-}
-
-function isAuthenticated(req, res, next) {
-   if (!req.session.authenticated) {
-      res.redirect("account");
-   }
-   else {
-      next();
-   }
-}
+// unfinished post
+app.post("/addToCart", function(req, res) {
+   console.log("added to cart");
+});
 
 // unfinished search
 app.get("/search", function(req, res) {
@@ -126,7 +130,7 @@ app.get("/search", function(req, res) {
       keyword = req.query.keyword;
    }
 
-   // implement what to do with serach keyword here.
+   // implement what to do with search keyword here.
 
    res.send("You have used search! Now implement it!");
 });
@@ -137,12 +141,9 @@ app.get("/search", function(req, res) {
 
 //store recepit
 
-//search for login existing user
+//database request for login existing user
 
 //listener
-// app.listen(process.env.PORT, process.env.IP, function() {
-//    console.log("Express server is running...");
-// });
 
 app.listen(process.env.PORT || 8080, "0.0.0.0", function() {
    console.log("Running Express Server...");
