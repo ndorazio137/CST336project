@@ -9,35 +9,22 @@
           
    <!-- Display Case Container -->
    <div id="wands-display" class="container">
-        
-        <!-- product container 1 -->
-        <div class="box blue-box product-container">
-            <form action="/addToCart" method="POST">
-                <img class="potions" src='img/purple-bottle.jpg' width='200'>
-                <h5>Purple potion</h5>
-                <p>600 Denar</p>
-                
-                <input class="product_id" type="hidden" name="product_id" value="1">
-                <input class="product_name" type="hidden" name="product_name" value="purple_potion">
-                <input class="product_price" type="hidden" name="product_price" value="600">
-                <input class="add-to-cart" type="submit" value="Add To Cart">
-            </form>
-        </div
-        
-        <!-- product container 2 -->
-        <!--<div class="box blue-box product-container">-->
-        <!--    <form>-->
-        <!--        <img class="potions" src='img/glowing-blue-bottle.jpg' width='210'>-->
-        <!--        <h5>Blue Potion</h5>-->
-        <!--        <p>200 Denar</p>-->
-                
-        <!--        <input class="product_id" type="hidden" name="product_id" value="2">-->
-        <!--        <input class="product_name" type="hidden" name="product_name" value="blue_potion">-->
-        <!--        <input class="product_price" type="hidden" name="product_price" value="200">-->
-        <!--        <input class="product_quantity" type="hidden" name="product_quantity" value="1">-->
-        <!--        <input class="add-to-cart" type="submit" value="Add To Cart">-->
-        <!--    </form>-->
-        <!--</div>-->
+      
+      <!--displaying wand products-->
+      <% rows.forEach(function(row){ %>
+      <div class="box blue-box product-container">
+         <form action="/addToCart" method="POST">
+            <img src='<%= row.imageUrl %>' width='210' alt='<%= row.imageUrl %>'/>
+            <br />
+            <h5><%= row.name %></h5>
+            <p><%= row.price %> Denars</p>
+            <input type="hidden" name="product_id" value='<%= row.productId %>'>
+            <input type="hidden" name="product_name" value='<%= row.name %>'>      
+            <input type="hidden" name="product_price" value='<%= row.price %>'>
+            <input class="add-to-cart" type="submit" value="Add To Cart">
+         </form>
+      </div>
+      <% }); %>
         
    </div> <!-- ends display case container -->
    

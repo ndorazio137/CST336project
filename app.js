@@ -40,13 +40,13 @@ app.post("/login", async function(req, res) {
    console.log("passwordMatch: " + passwordMatch.toString());
    //*******This is commented out for easy access to other pages while building*****//
    //** Do not delete.It will be used ** ** ** //
-   // if (username == "admin" && passwordMatch) {
-   //    req.session.authenticated = true;
-   res.render("admin");
-   // }
-   // else {
-   //    res.render("login", { "loginError": true });
-   // }
+   if (username == "admin" && passwordMatch) {
+      req.session.authenticated = true;
+      res.render("admin");
+   }
+   else {
+      res.render("login", { "loginError": true });
+   }
 });
 
 function checkPassword(password, hashedValue) {
@@ -94,7 +94,12 @@ app.get("/armor", function(req, res) {
 });
 
 app.get("/wands", function(req, res) {
-   res.render("wands");
+   let sql = "SELECT * FROM Products WHERE type= 'Weapon'";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("wands", { "rows": rows });
+   });
 });
 
 app.get("/crystals", function(req, res) {
@@ -119,7 +124,9 @@ app.get("/thankyou", function(req, res) {
 
 // unfinished post
 app.post("/addToCart", function(req, res) {
-   console.log("added to cart");
+   console.log("Product ID: " + req.body.product_id);
+   console.log("Product name: " + req.body.product_name);
+   console.log("Product price: " + req.body.product_price);
 });
 
 // unfinished search
