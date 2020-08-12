@@ -14,7 +14,7 @@
  margin-right: 20px;
 }
 
-h5 {
+.product_name {
  /*margin-left: 90%;*/
  margin-top: 80%;
  display: inline;
@@ -25,96 +25,17 @@ p {
    font-size: 15px;
 }
 
-h1 {
+.page_title {
   text-align: center;
   font-family: cursive;
     
 }
 
-/**/
-#Product_1 {
-    
-}
-
-/**/
-#Product_3 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
-
-/*Falchion Blades*/
-#Product_9 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
-
-/**/
-#Product_4 {
-    
-}
 footer {
     text-align: center;
 }
 
-container {
+.display-container {
     height: 150%;
 }
 
