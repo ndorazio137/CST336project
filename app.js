@@ -82,19 +82,36 @@ app.get("/logout", function(req, res) {
 });
 
 app.get("/potions", function(req, res) {
-   res.render("potions");
+   // res.render("potions");
+   let sql = "SELECT * FROM Products WHERE type= 'Potion'";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("potions", { "rows": rows });
+   });
 });
 
 app.get("/weapons", function(req, res) {
-   res.render("weapons");
+   let sql = "SELECT * FROM Products WHERE type= 'Weapon'";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("weapons", { "rows": rows });
+   });
 });
 
 app.get("/armor", function(req, res) {
-   res.render("armor");
+   // res.render("armor");
+   let sql = "SELECT * FROM Products WHERE type= 'Armor'";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("armor", { "rows": rows });
+   });
 });
 
 app.get("/wands", function(req, res) {
-   let sql = "SELECT * FROM Products WHERE type= 'Weapon'";
+   let sql = "SELECT * FROM Products WHERE type= 'Wand'";
    pool.query(sql, function(err, rows, fields) {
       if (err) throw err;
       //console.log(rows);
@@ -103,7 +120,13 @@ app.get("/wands", function(req, res) {
 });
 
 app.get("/crystals", function(req, res) {
-   res.render("crystals");
+   // res.render("crystals");
+   let sql = "SELECT * FROM Products WHERE type= 'Crystal'";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("crystals", { "rows": rows });
+   });
 });
 
 app.get("/signup", function(req, res) {
