@@ -128,6 +128,14 @@ app.get("/api/addToCart", function(req, res) {
    console.log("Product ID: " + req.query.product_id);
    console.log("Product name: " + req.query.product_name);
    console.log("Product price: " + req.query.product_price);
+
+   let sql = "";
+   let sqlParams = [];
+   pool.query(sql, sqlParams, function(err, rows, fields) {
+      if (err) throw err;
+      console.log(rows);
+   });
+
 });
 
 // unfinished search
