@@ -5,7 +5,7 @@ const pool = require("./dbPool.js");
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 
-// 
+// express app
 const app = express();
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -49,6 +49,24 @@ app.post("/login", async function(req, res) {
    }
 });
 
+function checkPassword(password, hashedValue) {
+   return new Promise(function(resolve, reject) {
+      bcrypt.compare(password, hashedValue, function(err, result) {
+         console.log("Result: " + result.toString());
+         resolve(result);
+      });
+   });
+}
+
+function isAuthenticated(req, res, next) {
+   if (!req.session.authenticated) {
+      res.redirect("account");
+   }
+   else {
+      next();
+   }
+}
+
 app.get("/myAccount", isAuthenticated, function(req, res) {
    if (req.session.authenticated) {
       res.render("account");
@@ -76,7 +94,12 @@ app.get("/armor", function(req, res) {
 });
 
 app.get("/wands", function(req, res) {
-   res.render("wands");
+   let sql = "SELECT * FROM Products WHERE type= 'Weapon'";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("wands", { "rows": rows });
+   });
 });
 
 app.get("/crystals", function(req, res) {
@@ -99,24 +122,13 @@ app.get("/thankyou", function(req, res) {
    res.render("thankyou");
 });
 
-//additional helper functions
-function checkPassword(password, hashedValue) {
-   return new Promise(function(resolve, reject) {
-      bcrypt.compare(password, hashedValue, function(err, result) {
-         console.log("Result: " + result.toString());
-         resolve(result);
-      });
-   });
-}
-
-function isAuthenticated(req, res, next) {
-   if (!req.session.authenticated) {
-      res.redirect("account");
-   }
-   else {
-      next();
-   }
-}
+// unfinished post
+app.get("/api/addToCart", function(req, res) {
+   console.log("From URL: ");
+   console.log("Product ID: " + req.query.product_id);
+   console.log("Product name: " + req.query.product_name);
+   console.log("Product price: " + req.query.product_price);
+});
 
 // unfinished search
 app.get("/search", function(req, res) {
@@ -126,7 +138,7 @@ app.get("/search", function(req, res) {
       keyword = req.query.keyword;
    }
 
-   // implement what to do with serach keyword here.
+   // implement what to do with search keyword here.
 
    res.send("You have used search! Now implement it!");
 });
@@ -137,12 +149,9 @@ app.get("/search", function(req, res) {
 
 //store recepit
 
-//search for login existing user
+//database request for login existing user
 
 //listener
-// app.listen(process.env.PORT, process.env.IP, function() {
-//    console.log("Express server is running...");
-// });
 
 app.listen(process.env.PORT || 8080, "0.0.0.0", function() {
    console.log("Running Express Server...");
