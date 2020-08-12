@@ -14,7 +14,7 @@
  margin-right: 20px;
 }
 
-h5 {
+.product_name {
  /*margin-left: 90%;*/
  margin-top: 80%;
  display: inline;
@@ -25,7 +25,7 @@ p {
    font-size: 15px;
 }
 
-h1 {
+.page_title {
   text-align: center;
   font-family: cursive;
     
@@ -35,7 +35,7 @@ footer {
     text-align: center;
 }
 
-container {
+.display-container {
     height: 150%;
 }
 
