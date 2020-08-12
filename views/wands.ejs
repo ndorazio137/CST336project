@@ -13,7 +13,7 @@
       <!--displaying wand products-->
       <% rows.forEach(function(row){ %>
       <div class="box blue-box product-container">
-         <form action="/addToCart" method="POST">
+         <form action="/api/addToCart" method="GET">
             <img src='<%= row.imageUrl %>' width='210' alt='<%= row.imageUrl %>'/>
             <br />
             <h5><%= row.name %></h5>

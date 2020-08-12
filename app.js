@@ -123,10 +123,11 @@ app.get("/thankyou", function(req, res) {
 });
 
 // unfinished post
-app.post("/addToCart", function(req, res) {
-   console.log("Product ID: " + req.body.product_id);
-   console.log("Product name: " + req.body.product_name);
-   console.log("Product price: " + req.body.product_price);
+app.get("/api/addToCart", function(req, res) {
+   console.log("From URL: ");
+   console.log("Product ID: " + req.query.product_id);
+   console.log("Product name: " + req.query.product_name);
+   console.log("Product price: " + req.query.product_price);
 });
 
 // unfinished search
