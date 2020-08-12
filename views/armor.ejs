@@ -2,7 +2,28 @@
    <%- include('partials/navbar.ejs') %>
     
    <!-- Front End Design for Armor Page -->
-   <p> DEV NOTE: Armor needs to be implemented </p>
+   <!--<p> DEV NOTE: Armor needs to be implemented </p>-->
+   
+   <h1>Alchemist's Shop</h1>
+      <hr />
+      <!-- Display Case Container -->
+      <div id="armor-display" class="container">
+         <!--displaying products-->
+         <% rows.forEach(function(row){ %>
+         <div class="box blue-box product-container">
+            <form action="/api/addToCart" method="GET">
+               <img src='<%= row.imageUrl %>' width='210' alt='<%= row.imageUrl %>'/>
+               <br />
+               <h5><%= row.name %></h5>
+               <p><%= row.price %> Denars</p>
+               <input type="hidden" name="product_id" value='<%= row.productId %>'>
+               <input type="hidden" name="product_name" value='<%= row.name %>'>      
+               <input type="hidden" name="product_price" value='<%= row.price %>'>
+               <input class="add-to-cart" type="submit" value="Add To Cart">
+            </form>
+         </div>
+         <% }); %>
+      </div> <!-- ends display case container -->
     
    <%- include('partials/footer.ejs') %>
    </body>
