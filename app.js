@@ -153,17 +153,32 @@ app.get("/api/addToCart", function(req, res) {
    console.log("Product price: " + req.query.product_price);
 });
 
-// unfinished search
+
 app.get("/search", function(req, res) {
 
-   let keyword = "";
-   if (req.query.keyword) {
-      keyword = req.query.keyword;
+   // Set default values for type, name, and desc 
+   // and get them from the form if applicable
+   let type = "%";
+   if (req.query.type) {
+      type = req.query.type;
+   }
+   let name = "%";
+   if (req.query.name) {
+      name = req.query.name;
+   }
+   let desc = "%";
+   if (req.query.desc) {
+      desc = req.query.desc;
    }
 
-   // implement what to do with search keyword here.
-
-   res.send("You have used search! Now implement it!");
+   // Run SQL query
+   let sql = "SELECT * FROM Products WHERE type LIKE ? AND name LIKE ? AND description LIKE ?";
+   let sqlParams = ["%"+type+"%", "%"+name+"%", "%"+desc+"%"];
+   pool.query(sql, sqlParams, function(err, rows, fields) {
+      if (err) throw err;
+      // Render search results page, passing the results of the SQL query
+      res.render("searchResults", { "rows": rows });
+   });
 });
 
 // sql database path route. SQL statement goes here.
