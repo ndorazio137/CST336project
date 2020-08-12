@@ -5,7 +5,7 @@ const pool = require("./dbPool.js");
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 
-// 
+// express app
 const app = express();
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -49,57 +49,6 @@ app.post("/login", async function(req, res) {
    }
 });
 
-app.get("/myAccount", isAuthenticated, function(req, res) {
-   if (req.session.authenticated) {
-      res.render("account");
-   }
-   else {
-      res.redirect("login");
-   }
-});
-
-app.get("/logout", function(req, res) {
-   req.session.destroy();
-   res.redirect("/");
-});
-
-app.get("/potions", function(req, res) {
-   res.render("potions");
-});
-
-app.get("/weapons", function(req, res) {
-   res.render("weapons");
-});
-
-app.get("/armor", function(req, res) {
-   res.render("armor");
-});
-
-app.get("/wands", function(req, res) {
-   res.render("wands");
-});
-
-app.get("/crystals", function(req, res) {
-   res.render("crystals");
-});
-
-app.get("/signup", function(req, res) {
-   res.render("signup");
-});
-
-app.get("/shoppingcart", function(req, res) {
-   res.render("shoppingcart");
-});
-
-app.get("/checkout", function(req, res) {
-   res.render("checkout");
-});
-
-app.get("/thankyou", function(req, res) {
-   res.render("thankyou");
-});
-
-//additional helper functions
 function checkPassword(password, hashedValue) {
    return new Promise(function(resolve, reject) {
       bcrypt.compare(password, hashedValue, function(err, result) {
@@ -118,6 +67,92 @@ function isAuthenticated(req, res, next) {
    }
 }
 
+app.get("/myAccount", isAuthenticated, function(req, res) {
+   if (req.session.authenticated) {
+      res.render("account");
+   }
+   else {
+      res.redirect("login");
+   }
+});
+
+app.get("/logout", function(req, res) {
+   req.session.destroy();
+   res.redirect("/");
+});
+
+app.get("/potions", function(req, res) {
+   // res.render("potions");
+   let sql = "SELECT * FROM Products WHERE type= 'Potion'";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("potions", { "rows": rows });
+   });
+});
+
+app.get("/weapons", function(req, res) {
+   let sql = "SELECT * FROM Products WHERE type= 'Weapon'";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("weapons", { "rows": rows });
+   });
+});
+
+app.get("/armor", function(req, res) {
+   // res.render("armor");
+   let sql = "SELECT * FROM Products WHERE type= 'Armor'";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("armor", { "rows": rows });
+   });
+});
+
+app.get("/wands", function(req, res) {
+   let sql = "SELECT * FROM Products WHERE type= 'Wand'";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("wands", { "rows": rows });
+   });
+});
+
+app.get("/crystals", function(req, res) {
+   // res.render("crystals");
+   let sql = "SELECT * FROM Products WHERE type= 'Crystal'";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("crystals", { "rows": rows });
+   });
+});
+
+app.get("/signup", function(req, res) {
+   res.render("signup");
+});
+
+app.get("/shoppingcart", function(req, res) {
+   res.render("shoppingcart");
+});
+
+app.get("/checkout", function(req, res) {
+   res.render("checkout");
+});
+
+app.get("/thankyou", function(req, res) {
+   res.render("thankyou");
+});
+
+// unfinished post
+app.get("/api/addToCart", function(req, res) {
+   console.log("From URL: ");
+   console.log("Product ID: " + req.query.product_id);
+   console.log("Product name: " + req.query.product_name);
+   console.log("Product price: " + req.query.product_price);
+});
+
 // unfinished search
 app.get("/search", function(req, res) {
 
@@ -126,7 +161,7 @@ app.get("/search", function(req, res) {
       keyword = req.query.keyword;
    }
 
-   // implement what to do with serach keyword here.
+   // implement what to do with search keyword here.
 
    res.send("You have used search! Now implement it!");
 });
@@ -137,12 +172,9 @@ app.get("/search", function(req, res) {
 
 //store recepit
 
-//search for login existing user
+//database request for login existing user
 
 //listener
-// app.listen(process.env.PORT, process.env.IP, function() {
-//    console.log("Express server is running...");
-// });
 
 app.listen(process.env.PORT || 8080, "0.0.0.0", function() {
    console.log("Running Express Server...");
