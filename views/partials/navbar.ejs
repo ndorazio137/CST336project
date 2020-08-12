@@ -33,17 +33,28 @@
             <a class="nav-link" href="/crystals">Crystals</a>
          </li>
          
-         <!-- search field and button -->
+         <!--search field and button -->
          <li>
             <form action="/search" class="form-inline my-2 my-lg-0">
+               
                <div class="btn-group" id="search" role="group" 
                   aria-label="Button group with nested search icon and search text bar">
+                  
+                  <input class="form-control mr-sm-2" id="search-type-text-box" type="search" 
+                     placeholder="Search Product Types" name="type">
+                  
+                  <input class="form-control mr-sm-2" id="search-type-text-box" type="search" 
+                     placeholder="Search Product Names" name="name">
+                     
+                     <input class="form-control mr-sm-2" id="search-type-text-box" type="search" 
+                     placeholder="Search Product Descriptions" name="desc">
+                     
                   <button class="btn my-2 my-sm-0" id="search-btn"
                      type="submit"><i><img src="img/search.png" width="30" height="30" 
                            class="d-inline-block align-top" alt="search icon"></i></button>
-                  <input class="form-control mr-sm-2" id="search-text-box" type="search" 
-                     placeholder="Search" aria-label="Search">
+               
                </div>
+               
             </form>
          </li>
 
