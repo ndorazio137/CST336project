@@ -163,7 +163,15 @@ app.get("/search", function(req, res) {
 
    // implement what to do with search keyword here.
 
-   res.send("You have used search! Now implement it!");
+   // res.send("You have used search! Now implement it!");
+   let searchTerm = keyword + "%";
+   let sql = "SELECT * FROM Products WHERE name LIKE ? OR description LIKE ? OR type = ?";
+   let sqlParams = [searchTerm, searchTerm, searchTerm];
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("results", { "rows": rows });
+   });
 });
 
 // sql database path route. SQL statement goes here.

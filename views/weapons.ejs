@@ -13,7 +13,7 @@
       <div id="weapons-display" class="container">
          <!--displaying weapon products-->
          <% rows.forEach(function(row){ %>
-         <div class="box blue-box product-container">
+         <div class="box blue-box product-container" id="Product_<%= row.productId %>">
             <form action="/api/addToCart" method="GET">
                <img src='<%= row.imageUrl %>' width='210' alt='<%= row.imageUrl %>'/>
                <br />
