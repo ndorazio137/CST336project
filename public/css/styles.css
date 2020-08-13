@@ -6,6 +6,10 @@ body {
 nav a {
     color: #306;
 }
+
+.user-forms {
+    text-align: center;
+}
          
 .outer-flex-container {
     padding: 1.5em;
@@ -93,7 +97,7 @@ hr:before { /* Not really supposed to work, but does */
 .remove-cart-item-btn {
     background-color: rgb(200,0,0); /*red*/
     border-radius: 25px; /*circular button*/
-    color: white; /*icon color*/
+    color: black; /*icon color*/
     padding: 12px 16px;
     font-size: 16px;
 }
