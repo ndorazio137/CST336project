@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-    var cart = new Map();
-
     $(".add-to-cart").on("click", function(event) {
         event.preventDefault();
 
@@ -12,7 +10,7 @@ $(document).ready(function() {
         let product_price = urlParams.get("product_price");
 
         $.ajax({
-            method: "get",
+            method: "GET",
             url: "/api/addToCart",
             data: {
                 "product_id": product_id,
@@ -20,7 +18,7 @@ $(document).ready(function() {
                 "product_price": product_price
             },
             success: function(data, status) {
-
+                console.log("Returned from addToCart AJAX");
             }
         }); //ajax
     });

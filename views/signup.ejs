@@ -1,7 +1,8 @@
-   <%- include('partials/login&signup_header.ejs') %>
+   <%- include('partials/header.ejs') %>
+   <%- include('partials/navbar.ejs') %>
    
       <!-- A Container for the Signup Display -->
-      <div>
+      <div class="user-forms">
             
          <!-- brand logo -->
          <a class="form-logo" href="/">
@@ -13,17 +14,16 @@
          <div>
             
             <!-- Sign Up Form -->
-            <form id="signupForm" method="post" action="/api/signup">
+            <form action="/">
                <h1> Create your user account </h1>
                <br />
                <!-- first name -->
                <img src="img/add_user.png" width="30" height="30" 
                      class="d-inline-block align-top" alt="lock outline">
-               <input type="text" name="username" 
-                     placeholder="Enter Username">
-                        <span id="usernameError"></span> <br />
+               <input type="text" name="first-name" 
+                     placeholder="Enter First Name">
                <br />
-               
+    <!-- ****** CO ****** --> 
                  <% if (typeof usernameError != "undefined" && usernameError) { %>
                <h3 class="error"> This username is already taken. Please try again.
                </h3>
@@ -52,28 +52,45 @@
                <!--      class="d-inline-block align-top" alt="lock outline">-->
                <!--<input type="text" name="last-name" -->
                <!--      placeholder="Enter Last Name">-->
-            
+  <!-- ****** END CO ****** --> 
+
+  <!-- ****** MASTER ****** --> 
+               <!-- last name -->
+               <img src="img/add_user.png" width="30" height="30" 
+                     class="d-inline-block align-top" alt="lock outline">
+               <input type="text" name="last-name" 
+                     placeholder="Enter Last Name">
+               <br />
+               <!-- email -->
+               <img src="img/email.png" width="30" height="30" 
+                     class="d-inline-block align-top" alt="lock outline">
+               <input type="text" name="email" 
+                     placeholder="Enter Email Address">
+               <br />
+  <!-- ****** END MASTER ****** --> 
+
                <!-- username -->
-               <!--<img src="img/add_user.png" width="30" height="30" -->
-               <!--      class="d-inline-block align-top" alt="lock outline">-->
-               <!--<input id="signup-username" type="text" name="signup-username"-->
-               <!--      placeholder="Enter a Username">-->
-               <!--<br />-->
+               <img src="img/add_user.png" width="30" height="30" 
+                     class="d-inline-block align-top" alt="lock outline">
+               <input id="signup-username" type="text" name="signup-username"
+                     placeholder="Enter a Username">
+               <br />
                <!-- password -->
-               <!--<img src="img/lock.png" width="30" height="30" -->
-               <!--      class="d-inline-block align-top" alt="lock outline">-->
-               <!--<input id="signup-password" type="password" name="signup-password" -->
-               <!--      placeholder="Enter a Password">-->
-               <!--<br />-->
+               <img src="img/lock.png" width="30" height="30" 
+                     class="d-inline-block align-top" alt="lock outline">
+               <input id="signup-password" type="password" name="signup-password" 
+                 class="user-forms"    placeholder="Enter a Password">
+               <br />
                <!-- verify password -->
-               <!--<img src="img/lock.png" width="30" height="30" -->
-               <!--      class="d-inline-block align-top" alt="lock outline">-->
-               <!--<input id="password-again" type="password" name="password-again" -->
-               <!--      placeholder="Verify Password"/>-->
-               <!--<br />-->
-               <!--<br />-->
+               <img src="img/lock.png" width="30" height="30" 
+                     class="d-inline-block align-top" alt="lock outline">
+               <input id="password-again" type="password" name="password-again" 
+                     placeholder="Verify Password"/>
+               <br />
+               <br />
                <!-- submit form -->
-           
+
+ <!-- ****** CO ****** --> 
                  <script>
            var usernameAvailable = false;
        
@@ -102,7 +119,7 @@
               });//ajax
     });//username
      
-         
+         MASTER
                $.ajax({
             method: "POST",
             url: "/api/signup",
@@ -135,7 +152,7 @@
         }
         
     });//sign up form
-    
+    >>>>>>> master
        function isFormValid(){
              var isValid = true;
               if (!usernameAvailable){
@@ -160,8 +177,20 @@
          </div> <!-- end inner container--> 
          
       </div> <!-- end signup display container 
-   
+ 
+ <!-- ****** END CO ****** --> 
     
+=======
+
+<!-- ****** MASTER ****** --> 
+               <button type="submit"> Sign Up </button>
+            </form> <!-- sign up form ends -->
+                
+         </div> <!-- end inner container -->
+      </div> <!-- end signup display container -->
+
+<!-- ****** END MASTER ****** --> 
+ 
    <%- include('partials/footer.ejs') %>
    </body>
 </html>
