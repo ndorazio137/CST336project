@@ -2,6 +2,38 @@
         
       <!-- A Container for Login Display -->
       <div>
+         <!-- brand logo -->
+         <a class="form-logo" href="/">
+            <img src="img/wizard_hat.png" width="60" height="60" 
+               class="d-inline-block align-top" alt="The Sourcerer's Source brand logo">
+         </a>
+            
+         <!-- An Inner Container for the Form -->
+         <div>
+            <!-- Login form -->
+            <form method="POST">
+               <h1> Log in to your account </h1>
+               <br />
+               <!-- username -->
+               <div>
+                  <img src="img/user.png" width="30" height="30" 
+                     class="d-inline-block align-top" alt="person outline">
+                  <input type="text" name="username"
+                     placeholder="Enter a Username">
+               </div>
+               <!-- password -->
+               <div>
+                  <img src="img/lock.png" width="30" height="30" 
+                     class="d-inline-block align-top" alt="lock outline">
+                  <input type="password" name="password" 
+                     placeholder="Enter a Password">
+               </div>
+               <br />
+               <br />
+               <!-- submit form -->
+               <input id="loginButton" type="submit" value="Log In" />
+               <br>  
+            </form> <!-- login form ends -->
             
             <!-- wrong credentials error -->
             <% if (typeof loginError != "undefined" && loginError) { %>
@@ -11,7 +43,11 @@
             <% }%>
              
             <!-- redirect to create a new account -->
-           
+            <p>
+               New to The Sourcerer's Source? 
+               <a href="/signup">Create an account.</a> 
+            </p>
+            
          </div> <!-- end inner container -->
       </div> <!-- end login display container -->
        
