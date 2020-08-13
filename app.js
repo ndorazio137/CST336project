@@ -30,18 +30,38 @@ app.get("/login", function(req, res) {
 });
 
 app.post("/api/signup", async function(req, res){
-    let username = req.body.username;
- let usernameResult = await checkUsername(username);
- if (usernameResult.length <= 0){
- console.log("username does not exist");
- res.render("signup", {usernameError: true});
- }
-else{
-    console.log("USERNAME: " + username);
-    res.redirect("/");
-}
+   let username = req.body.username;
+   let usernameResult = await checkUsername(username);
+   if (usernameResult.length <= 0){
+      console.log("username does not exist");
+      res.render("signup", {usernameError: true});
+   }
+   else{
+      console.log("USERNAME: " + username);
 
+   }
+   let email = req.body.email;
+   let emailResult = await checkEmail(email);
+   if (emailResult.length <= 0){
+      console.log("email does not exist");
+      res.render("signup", {emailError: true});
+   }
+   else{
+      console.log("EMAIL: " + email);
+      res.redirect("/");
+   }
+   if(emailResult.length > 0 && usernameResult > 0){
+      res.redirect("/");
+   }
+   else{
+      if(usernameResult <= 0 && emailResult <= 0){
+         res.redirect("/");
+      }
+   }
 });
+
+
+
 
 /**
 * Checks whether the username exists in the database.
@@ -55,6 +75,17 @@ function checkUsername(username) {
      pool.query(sql, [username], function (err, rows, fields) {
         if (err) throw err;
         console.log("checkUsername: Rows found: " + rows.length);
+        resolve(rows);
+     });//query
+  });//promise
+}
+
+function checkEmail(email) {
+  let sql = "SELECT * FROM Users WHERE email = ?";
+  return new Promise(function(resolve, reject){
+     pool.query(sql, [email], function (err, rows, fields) {
+        if (err) throw err;
+        console.log("checkEmail: Rows found: " + rows.length);
         resolve(rows);
      });//query
   });//promise

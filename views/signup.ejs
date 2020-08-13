@@ -23,25 +23,36 @@
                      placeholder="Enter Username">
                         <span id="usernameError"></span> <br />
                <br />
-                   <button type="submit" id="signup"> Sign Up </button>
-            </form> <!-- sign up form ends -->
-                <!-- wrong credentials error -->
-            <% if (typeof usernameError != "undefined" && usernameError) { %>
+               
+                 <% if (typeof usernameError != "undefined" && usernameError) { %>
                <h3 class="error"> This username is already taken. Please try again.
                </h3>
             <% }%>
+               
+                <br />
+                <!--email -->
+               <img src="img/email.png" width="30" height="30" 
+                     class="d-inline-block align-top" alt="lock outline">
+               <input type="text" name="email" 
+                     placeholder="Enter Email Address">
+                     <span id="emailError"></span> <br />
+               <br />
+                    <!-- wrong credentials error -->
+            <% if (typeof emailError != "undefined" && emailError) { %>
+               <h3 class="error"> This email is already taken. Please try again.
+               </h3>
+            <% }%>
+           
+                   <button type="submit" id="signup"> Sign Up </button>
+         
+           
+                </form> <!-- sign up form ends -->
                <!-- last name -->
                <!--<img src="img/add_user.png" width="30" height="30" -->
                <!--      class="d-inline-block align-top" alt="lock outline">-->
                <!--<input type="text" name="last-name" -->
                <!--      placeholder="Enter Last Name">-->
-               <!--<br />-->
-               <!-- email -->
-               <!--<img src="img/email.png" width="30" height="30" -->
-               <!--      class="d-inline-block align-top" alt="lock outline">-->
-               <!--<input type="text" name="email" -->
-               <!--      placeholder="Enter Email Address">-->
-               <!--<br />-->
+            
                <!-- username -->
                <!--<img src="img/add_user.png" width="30" height="30" -->
                <!--      class="d-inline-block align-top" alt="lock outline">-->
@@ -87,9 +98,34 @@
               }
               
          }
+         
+              });//ajax
+    });//username
+     
+         
+               $.ajax({
+            method: "POST",
+            url: "/api/signup",
+              data: { "email":$("#email").val() },
+         success: function(result,status) {
+         
+           
+             if(result.available) {
+                 $("#emailError").html("Email is available!");
+                 $("emailError").css("color", "green");
+                 emailAvailable = true;
+             }
+             else{
+                 $("# emailError").html("Email is unavailable!");
+                 $("# emailError").css("color", "red");
+                  emailAvailable = false;
+              }
+              
+         }
+         
             
         });//ajax
-    });//username
+    });//email
      
        $("#signupForm").submit(function(event){
         
@@ -109,6 +145,16 @@
               if($("#username").val().length == 0){
                   isValid = false;
                   $("#usernameError").html("Username is required");
+              }
+              
+                var isValid = true;
+              if (!emailAvailable){
+                  isValid = false;
+              }
+              
+              if($("#email").val().length == 0){
+                  isValid = false;
+                  $("#emailError").html("Email is required");
               }
 </script>
          </div> <!-- end inner container--> 
