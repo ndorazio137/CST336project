@@ -29,6 +29,38 @@ app.get("/login", function(req, res) {
    res.render("login");
 });
 
+app.post("/api/signup", async function(req, res){
+    let username = req.body.username;
+ let usernameResult = await checkUsername(username);
+ if (usernameResult.length <= 0){
+ console.log("username does not exist");
+ res.render("signup", {usernameError: true});
+ }
+else{
+    console.log("USERNAME: " + username);
+    res.redirect("/");
+}
+
+});
+
+/**
+* Checks whether the username exists in the database.
+* if found, returns the corresponding record.
+* @param {string} username
+* @return {array of objects}
+*/
+function checkUsername(username) {
+  let sql = "SELECT * FROM Users WHERE username = ?";
+  return new Promise(function(resolve, reject){
+     pool.query(sql, [username], function (err, rows, fields) {
+        if (err) throw err;
+        console.log("checkUsername: Rows found: " + rows.length);
+        resolve(rows);
+     });//query
+  });//promise
+}
+
+
 app.post("/login", async function(req, res) {
    let username = req.body.username;
    let password = req.body.password;
