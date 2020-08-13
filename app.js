@@ -207,15 +207,15 @@ app.get("/api/addToCart", function(req, res) {
 });
 
 
-app.get("/addProduct", function(req, res) {
-   let sql = "INSERT INTO Products (name, type, price) VALUES (?, ?, ?)";
-   let sqlParams = [];
+app.post("/addProduct", function(req, res) {
+   let sql = "INSERT INTO Products (name, type, price, description, imageUrl, numberInStock) VALUES (?, ?, ?, ?, ?, ?)";
+   let sqlParams = [req.body.product_name, req.body.product_category, req.body.product_price, req.body.product_description, req.body.product_image, req.body.product_quantity];
    pool.query(sql, sqlParams, function(err, rows, fields) {
       if (err) throw err;
       // Render search results page, passing the results of the SQL query
       console.log(rows);
       console.log(sqlParams);
-      res.render("searchResults", { "rows": rows });
+      // res.render("searchResults", { "rows": rows });
    });
 });
 
