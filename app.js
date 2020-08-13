@@ -123,7 +123,7 @@ app.get("/myAccount", isAuthenticated, function(req, res) {
       res.render("account");
    }
    else {
-      res.redirect("potions");
+      res.redirect("login");
    }
 });
 
