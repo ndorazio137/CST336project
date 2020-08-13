@@ -37,28 +37,68 @@ app.get("/login", function(req, res) {
 app.post("/login", async function(req, res) {
    let username = req.body.username;
    let password = req.body.password;
+   let isAdmin = 0;
    console.log("USERNAME: " + username);
    console.log("PASSWORD: " + password);
+   let hashedPwd;
 
    let result = await checkUsername(username);
    console.dir(result);
-   let hashedPwd = "";
+   hashedPwd = "";
 
+   let adminCheckRows = [];
    if (result.length > 0) {
       hashedPwd = result[0].password;
+      adminCheckRows = await getIsAdminRows(username);
    }
+   if (adminCheckRows.length > 0) {
+      isAdmin = adminCheckRows[0].isAdmin;
+   }
+   console.log("isAdmin:  " + isAdmin);
 
    let passwordMatch = await checkPassword(password, hashedPwd);
    console.log("passwordMatch: " + passwordMatch.toString());
-
-   if (passwordMatch) {
+   if (isAdmin && passwordMatch) {
       req.session.authenticated = true;
       res.render("admin");
+   }
+   else if (passwordMatch) {
+      req.session.authenticated = true;
+      res.render("account");
    }
    else {
       res.render("login", { "loginError": true });
    }
 });
+
+
+function getIsAdminRows(username) {
+   let sql = "SELECT isAdmin FROM Users WHERE username = ?";
+   return new Promise(function(resolve, reject) {
+      pool.query(sql, [username], function(err, rows, fields) {
+         if (err) throw err;
+         console.log("getIsAdminRows: Rows found: " + rows.length);
+         resolve(rows);
+      }); //query
+   }); //promise
+}
+
+/** 
+ * Checks whether the username exists in the database.
+ * if found, returns the corresponding record.
+ * @param {string} username
+ * @return {array of objects}
+ */
+function checkUsername(username) {
+   let sql = "SELECT * FROM Users WHERE username = ?";
+   return new Promise(function(resolve, reject) {
+      pool.query(sql, [username], function(err, rows, fields) {
+         if (err) throw err;
+         console.log("checkUsername: Rows found: " + rows.length);
+         resolve(rows);
+      }); //query
+   }); //promise
+}
 
 function checkPassword(password, hashedValue) {
    return new Promise(function(resolve, reject) {
@@ -171,6 +211,19 @@ app.get("/api/addToCart", function(req, res) {
    });
 
 });
+
+app.post("/addProduct", function(req, res) {
+   let sql = "INSERT INTO Products (name, type, price, description, imageUrl, numberInStock) VALUES (?, ?, ?, ?, ?, ?)";
+   let sqlParams = [req.body.product_name, req.body.product_category, req.body.product_price, req.body.product_description, req.body.product_image, req.body.product_quantity];
+   pool.query(sql, sqlParams, function(err, rows, fields) {
+      if (err) throw err;
+      // Render search results page, passing the results of the SQL query
+      console.log(rows);
+      console.log(sqlParams);
+      // res.render("searchResults", { "rows": rows });
+   });
+});
+
 
 app.get("/search", function(req, res) {
 

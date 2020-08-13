@@ -1,16 +1,68 @@
+body {
+    background-image: url("/img/wood.jpg");
+    color: #eee;
+}
+
+nav a {
+    color: #306;
+}
+
+nav a:hover {
+    font-size: 1.5em;
+    transition: 1s;
+}
+         
+.outer-flex-container {
+    padding: 1.5em;
+    max-width: 960px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+.display-container {
+    columns: 1;
+    column-gap: 10px;
+    text-align: center;
+}
+
 .blue-box {
- border: 1px solid blue; 
- width: 275px;
- justify-content: center;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 10px;
+    max-width:100%;
+    text-align: center;
+    border: 2px solid blue;
+    padding: 1.7em;
+}
+
+@media only screen and (max-width: 1423px) and (min-width: 768px) {  
+    .display-container {
+        columns: 4;
+    }
+}
+@media only screen and (min-width: 1424px) {
+    .display-container {
+        columns: 6;
+    }
+}
+.blue-box, .product-container {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#footer {
+    font-size: .75em;
+    opacity: .25;
+    text-align: center;
+    padding-top: 3em; 
+    padding-bottom: 3em;
+    margin-bottom: -1.5em;
 }
 
 .page_title {
   text-align: center;
   font-family: cursive;
-}
-
-footer {
-    text-align: center;
 }
 
 /* Flaired edges, by Tomas Theunissen */
@@ -51,7 +103,7 @@ hr:before { /* Not really supposed to work, but does */
 }
 
 .remove-cart-item-btn:hover {
-    background-color: rgb(175,0,0); /*purplish red*/
+    background-color: rgb(175,0,0); /*darker red*/
     color: black; /*icon color*/
 }
 
