@@ -40,7 +40,6 @@ app.post("/login", async function(req, res) {
    let isAdmin  = 0;
    console.log("USERNAME: " + username);
    console.log("PASSWORD: " + password);
-   console.log("isAdmin:  " + isAdmin);
    let hashedPwd;
 
    let result = await checkUsername(username);
@@ -55,6 +54,7 @@ app.post("/login", async function(req, res) {
    if (adminCheckRows.length > 0) {
          isAdmin = adminCheckRows[0].isAdmin;
    }
+   console.log("isAdmin:  " + isAdmin);
 
    let passwordMatch = await checkPassword(password, hashedPwd);
    console.log("passwordMatch: " + passwordMatch.toString());
@@ -209,7 +209,7 @@ app.get("/api/addToCart", function(req, res) {
 
 app.get("/addProduct", function(req, res) {
    let sql = "INSERT INTO Products (name, type, price) VALUES (?, ?, ?)";
-   let sqlParams = []; // TODO: FIX THIS!!!!
+   let sqlParams = [];
    pool.query(sql, sqlParams, function(err, rows, fields) {
       if (err) throw err;
       // Render search results page, passing the results of the SQL query
