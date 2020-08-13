@@ -14,19 +14,21 @@ nav a {
     margin-left: auto;
     text-align: center;
 }
+
 .display-container {
     columns: 1;
     column-gap: 10px;
     text-align: center;
 }
+
 .blue-box {
     display: inline-block;
     vertical-align: top;
     margin-bottom: 10px;
     max-width:100%;
     text-align: center;
-    /*background-color: #cceeee;*/
-    border: 2px solid blue;
+    background-color: rgba(0,0,0,0.3);
+    border: 2px solid transparent;
     padding: 1.7em;
 }
 
@@ -41,13 +43,13 @@ nav a {
     }
 }
 .blue-box, .product-container {
-    border-radius: 5px;
+    border-radius: 15px;
     overflow: hidden;
 }
 
-#footer {
-    font-size: .75em;
-    opacity: .25;
+footer {
+    font-size: 1.1em;
+    opacity: .5;
     text-align: center;
     padding-top: 3em; 
     padding-bottom: 3em;
@@ -59,21 +61,13 @@ nav a {
   font-family: cursive;
 }
 
-/*footer {*/
-/*    text-align: center;*/
-/*}*/
-
-/*.display-container {*/
-/*    height: 150%;*/
-/*}*/
-
 /* Flaired edges, by Tomas Theunissen */
 
 hr {
     overflow: visible; /* For IE */
     height: 30px;
     border-style: solid;
-    border-color: black;
+    border-color: white;
     border-width: 1px 0 0 0;
     border-radius: 20px;
 }
@@ -83,7 +77,7 @@ hr:before { /* Not really supposed to work, but does */
     height: 30px;
     margin-top: -31px;
     border-style: solid;
-    border-color: black;
+    border-color: white;
     border-width: 0 0 1px 0;
     border-radius: 20px;
 }
@@ -105,7 +99,7 @@ hr:before { /* Not really supposed to work, but does */
 }
 
 .remove-cart-item-btn:hover {
-    background-color: rgb(175,0,0); /*purplish red*/
+    background-color: rgb(175,0,0); /*darker red*/
     color: black; /*icon color*/
 }
 
@@ -129,7 +123,7 @@ hr:before { /* Not really supposed to work, but does */
 .required_input:after {
     content:" *";
     color: red;
-  }
+}
 
 /****** Admin css ends here ********/
 
