@@ -1,7 +1,70 @@
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+.box {
+  margin-top: 30%;
+  text-align: center;
+}
+
+/* a {
+  color: black;
+} */
+
+
+.popup {
+  margin: 70px auto;
+  border-radius: 5px;
+  border: 5px solid white;
+  background-color: #ddd;
+  width: 40%;
+  height: 40%;
+  padding-left: 20px;
+  margin-top: 20%;
+  padding-bottom: 10px;
+ 
+}
+
+.popup .close {
+  position: absolute;
+  top: 40%;
+  right: 32%;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  /*color: #333;*/
+  
 body {
     background-image: url("/img/wood.jpg");
     color: #eee;
 }
+/*.popup .close:hover {*/
+/*  color: #06D85F;*/
+/*}*/
+.popup .content {
+  max-height: 30%;
+  
+  
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 100px;
+  left: 0;
+  right: 70px;
+  visibility: hidden;
+}
+.overlay:target {
+  visibility: visible;
+}
+
+
 
 nav a {
     color: #306;
@@ -25,6 +88,16 @@ nav a:hover {
     text-align: center;
 }
 .blue-box {
+/*  /*background-color: #E8FFFF; */
+ padding-left: 40px;
+ padding-right: 40px;
+ padding-top: 40px;
+ padding-bottom: 40px;
+ height: 285px;
+ width: 285px;
+ float: left;
+ display: table;
+ margin-right: 20px; */
     display: inline-block;
     vertical-align: top;
     margin-bottom: 10px;
@@ -50,6 +123,9 @@ nav a:hover {
     overflow: hidden;
 }
 
+/* p {
+   color: #157DEC;
+   font-size: 15px; */
 #footer {
     font-size: .75em;
     opacity: .25;
@@ -139,9 +215,11 @@ nav a:hover {
 /*    text-align: center;*/
 /*}*/
 
+  
 /*.display-container {*/
 /*    height: 150%;*/
 /*}*/
+
 
 /* Flaired edges, by Tomas Theunissen */
 
@@ -208,4 +286,8 @@ hr:before { /* Not really supposed to work, but does */
   }
 
 /****** Admin css ends here ********/
+
+
+
+
 

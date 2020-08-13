@@ -12,11 +12,13 @@
     <hr />
     <!-- Display Case Container -->
     <div id="weapons-display" class="display-container">
+        <div class="row">
      <!--displaying weapon products-->
      <% rows.forEach(function(row){ %>
-     <div class="box blue-box product-container" id="Product_<%= row.productId %>">
+     <div class="box blue-box product-container column" id="Product_<%= row.productId %>">
         <form action="/api/addToCart" method="GET">
-           <img src='<%= row.imageUrl %>' width='210' alt='<%= row.imageUrl %>'/>
+           <img src='<%= row.imageUrl %>' width='100%' height='100%' margin-top: '8px' vertical-align: 'middle' alt='<%= row.imageUrl %>'/>
+         
            <br />
            <h5 class="product_name"><%= row.name %></h5>
            <p class="product_price"><%= row.price %> Denars</p>
@@ -27,7 +29,8 @@
         </form>
      </div>
      <% }); %>
-       
+     
+     </div>  
      </div> <!-- ends display case container -->
     
     </div>
