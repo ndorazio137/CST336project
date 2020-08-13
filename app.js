@@ -203,7 +203,7 @@ app.get("/api/addToCart", function(req, res) {
    console.log("Product name: " + req.query.product_name);
    console.log("Product price: " + req.query.product_price);
 
-   let sql = "";
+   let sql = "SELECT * FROM Products WHERE productId = ? AND name = ? AND price = ?";
    let sqlParams = [req.query.product_id, req.query.product_name, req.query.product_price];
    pool.query(sql, sqlParams, function(err, rows, fields) {
       if (err) throw err;
@@ -222,7 +222,6 @@ app.post("/api/addProduct", function(req, res) {
       res.render("admin", { "rows": rows });
    });
 });
-
 
 app.get("/search", function(req, res) {
 
