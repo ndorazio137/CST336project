@@ -212,7 +212,7 @@ app.get("/api/addToCart", function(req, res) {
 
 });
 
-app.post("/addProduct", function(req, res) {
+app.post("/api/addProduct", function(req, res) {
    let sql = "INSERT INTO Products (name, type, price, description, imageUrl, numberInStock) VALUES (?, ?, ?, ?, ?, ?)";
    let sqlParams = [req.body.product_name, req.body.product_category, req.body.product_price, req.body.product_description, req.body.product_image, req.body.product_quantity];
    pool.query(sql, sqlParams, function(err, rows, fields) {
@@ -220,7 +220,7 @@ app.post("/addProduct", function(req, res) {
       // Render search results page, passing the results of the SQL query
       console.log(rows);
       console.log(sqlParams);
-      // res.render("searchResults", { "rows": rows });
+      //res.render("searchResults", { "rows": rows });
    });
 });
 
@@ -254,16 +254,7 @@ app.get("/search", function(req, res) {
    });
 });
 
-// sql database path route. SQL statement goes here.
-
-//store signup info
-
-//store recepit
-
-//database request for login existing user
-
 //listener
-
 app.listen(process.env.PORT || 8080, "0.0.0.0", function() {
    console.log("Running Express Server...");
 });
