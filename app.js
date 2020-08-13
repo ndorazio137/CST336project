@@ -37,7 +37,7 @@ app.get("/login", function(req, res) {
 app.post("/login", async function(req, res) {
    let username = req.body.username;
    let password = req.body.password;
-   let isAdmin  = 0;
+   let isAdmin = 0;
    console.log("USERNAME: " + username);
    console.log("PASSWORD: " + password);
    let hashedPwd;
@@ -45,21 +45,19 @@ app.post("/login", async function(req, res) {
    let result = await checkUsername(username);
    console.dir(result);
    hashedPwd = "";
-   
+
    let adminCheckRows = [];
    if (result.length > 0) {
       hashedPwd = result[0].password;
       adminCheckRows = await getIsAdminRows(username);
    }
    if (adminCheckRows.length > 0) {
-         isAdmin = adminCheckRows[0].isAdmin;
+      isAdmin = adminCheckRows[0].isAdmin;
    }
    console.log("isAdmin:  " + isAdmin);
 
    let passwordMatch = await checkPassword(password, hashedPwd);
    console.log("passwordMatch: " + passwordMatch.toString());
-   //*******This is commented out for easy access to other pages while building*****//
-   //** Do not delete.It will be used ** ** ** //
    if (isAdmin && passwordMatch) {
       req.session.authenticated = true;
       res.render("admin");
@@ -76,13 +74,13 @@ app.post("/login", async function(req, res) {
 
 function getIsAdminRows(username) {
    let sql = "SELECT isAdmin FROM Users WHERE username = ?";
-   return new Promise(function(resolve, reject){
-      pool.query(sql, [username], function (err, rows, fields) {
+   return new Promise(function(resolve, reject) {
+      pool.query(sql, [username], function(err, rows, fields) {
          if (err) throw err;
          console.log("getIsAdminRows: Rows found: " + rows.length);
          resolve(rows);
-      });//query
-   });//promise
+      }); //query
+   }); //promise
 }
 
 /** 
@@ -93,13 +91,13 @@ function getIsAdminRows(username) {
  */
 function checkUsername(username) {
    let sql = "SELECT * FROM Users WHERE username = ?";
-   return new Promise(function(resolve, reject){
-      pool.query(sql, [username], function (err, rows, fields) {
+   return new Promise(function(resolve, reject) {
+      pool.query(sql, [username], function(err, rows, fields) {
          if (err) throw err;
          console.log("checkUsername: Rows found: " + rows.length);
          resolve(rows);
-      });//query
-   });//promise
+      }); //query
+   }); //promise
 }
 
 function checkPassword(password, hashedValue) {
@@ -204,10 +202,17 @@ app.get("/api/addToCart", function(req, res) {
    console.log("Product ID: " + req.query.product_id);
    console.log("Product name: " + req.query.product_name);
    console.log("Product price: " + req.query.product_price);
+
+   let sql = "";
+   let sqlParams = [req.query.product_id, req.query.product_name, req.query.product_price];
+   pool.query(sql, sqlParams, function(err, rows, fields) {
+      if (err) throw err;
+      console.log(rows);
+   });
+
 });
 
-
-app.post("/addProduct", function(req, res) {
+app.post("/api/addProduct", function(req, res) {
    let sql = "INSERT INTO Products (name, type, price, description, imageUrl, numberInStock) VALUES (?, ?, ?, ?, ?, ?)";
    let sqlParams = [req.body.product_name, req.body.product_category, req.body.product_price, req.body.product_description, req.body.product_image, req.body.product_quantity];
    pool.query(sql, sqlParams, function(err, rows, fields) {
@@ -215,7 +220,7 @@ app.post("/addProduct", function(req, res) {
       // Render search results page, passing the results of the SQL query
       console.log(rows);
       console.log(sqlParams);
-      // res.render("searchResults", { "rows": rows });
+      //res.render("searchResults", { "rows": rows });
    });
 });
 
@@ -239,7 +244,7 @@ app.get("/search", function(req, res) {
 
    // Run SQL query
    let sql = "SELECT * FROM Products WHERE type LIKE ? AND name LIKE ? AND description LIKE ?";
-   let sqlParams = ["%"+type+"%", "%"+name+"%", "%"+desc+"%"];
+   let sqlParams = ["%" + type + "%", "%" + name + "%", "%" + desc + "%"];
    pool.query(sql, sqlParams, function(err, rows, fields) {
       if (err) throw err;
       // Render search results page, passing the results of the SQL query
@@ -249,16 +254,7 @@ app.get("/search", function(req, res) {
    });
 });
 
-// sql database path route. SQL statement goes here.
-
-//store signup info
-
-//store recepit
-
-//database request for login existing user
-
 //listener
-
 app.listen(process.env.PORT || 8080, "0.0.0.0", function() {
    console.log("Running Express Server...");
 });
