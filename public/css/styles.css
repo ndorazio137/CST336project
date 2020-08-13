@@ -1,43 +1,147 @@
-.item {
-   display: grid;
+body {
+    background-image: url("/img/wood.jpg");
+    color: #eee;
 }
 
+nav a {
+    color: #306;
+}
+
+nav a:hover {
+    font-size: 1.5em;
+    transition: 1s;
+}
+         
+.outer-flex-container {
+    padding: 1.5em;
+    max-width: 960px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+.display-container {
+    columns: 1;
+    column-gap: 10px;
+    text-align: center;
+}
 .blue-box {
- background-color: #E8FFFF; 
- padding-left: 40px;
- padding-right: 40px;
- padding-top: 40px;
- padding-bottom: 40px;
- width: 275px;
- float: left;
- display: table;
- margin-right: 20px;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 10px;
+    max-width:100%;
+    text-align: center;
+    /*background-color: #cceeee;*/
+    border: 2px solid blue;
+    padding: 1.7em;
 }
 
-.product_name {
- /*margin-left: 90%;*/
- margin-top: 80%;
- display: inline;
+@media only screen and (max-width: 1423px) and (min-width: 768px) {  
+    .display-container {
+        columns: 4;
+    }
+}
+@media only screen and (min-width: 1424px) {
+    .display-container {
+        columns: 6;
+    }
+}
+.blue-box, .product-container {
+    border-radius: 5px;
+    overflow: hidden;
 }
 
-.product_price {
-   color: #157DEC;
-   font-size: 15px;
+#footer {
+    font-size: .75em;
+    opacity: .25;
+    text-align: center;
+    padding-top: 3em; 
+    padding-bottom: 3em;
+    margin-bottom: -1.5em;
 }
+
+/*img:hover {*/
+/*    width: 100%;*/
+/*    transition: 1s;*/
+/*}*/
+
+
+
+/* Box-sizing reset: //w3bits.com/?p=3225 */
+/*html {*/
+/*  box-sizing: border-box;*/
+/*}*/
+
+/**,*/
+/**:before,*/
+/**:after {*/
+/*  box-sizing: inherit;*/
+/*}*/
+
+/* The Masonry Container */
+/*.display-container {*/
+/*  margin: 1.5em auto;*/
+/*  max-width: 800px;*/
+/*  column-gap: 1.5em;*/
+/*}*/
+
+
+
+
+
+
+/*.display-container {*/
+/*  display: grid;*/
+/*  grid-gap: 1em;*/
+/*  grid-template-columns: repeat(auto-fill, minmax(200px,1fr));*/
+/*  grid-auto-rows: 0;*/
+/*}*/
+
+
+/*.display-container {*/
+/*  display: grid;*/
+/*  grid-gap: 2em; */
+/*  grid-template-columns: repeat( auto-fill, minmax( 200px, 1fr ) ); */
+/*  grid-auto-rows: 250px; */
+/*}*/
+
+
+/*.col--2x {*/
+/*   grid-row-end: span 2;*/
+/*}*/
+/*.col--3x {*/
+/*   grid-row-end: span 3;*/
+/*}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .page_title {
   text-align: center;
   font-family: cursive;
-    
 }
 
-footer {
-    text-align: center;
-}
+/*footer {*/
+/*    text-align: center;*/
+/*}*/
 
-.display-container {
-    height: 150%;
-}
+/*.display-container {*/
+/*    height: 150%;*/
+/*}*/
 
 /* Flaired edges, by Tomas Theunissen */
 
