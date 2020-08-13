@@ -20,7 +20,7 @@
  display: inline;
 }
 
-p {
+.product_price {
    color: #157DEC;
    font-size: 15px;
 }

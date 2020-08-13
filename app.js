@@ -166,15 +166,15 @@ app.get("/search", function(req, res) {
 
    // Set default values for type, name, and desc 
    // and get them from the form if applicable
-   let type = "%";
+   let type = "";
    if (req.query.type) {
       type = req.query.type;
    }
-   let name = "%";
+   let name = "";
    if (req.query.name) {
       name = req.query.name;
    }
-   let desc = "%";
+   let desc = "";
    if (req.query.desc) {
       desc = req.query.desc;
    }
@@ -185,6 +185,8 @@ app.get("/search", function(req, res) {
    pool.query(sql, sqlParams, function(err, rows, fields) {
       if (err) throw err;
       // Render search results page, passing the results of the SQL query
+      console.log(rows);
+      console.log(sqlParams);
       res.render("searchResults", { "rows": rows });
    });
 });
