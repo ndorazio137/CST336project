@@ -1,163 +1,17 @@
-/*.item {*/
-/*   display: grid;*/
-/*}*/
+body {
+    background-image: url("/img/wood.jpg");
+    color: #eee;
+}
 
-/*.blue-box {*/
-/* background-color: #E8FFFF; */
-/* padding-left: 40px;*/
-/* padding-right: 40px;*/
-/* padding-top: 40px;*/
-/* padding-bottom: 40px;*/
-/* width: 275px;*/
-/* float: left;*/
-/* display: table;*/
-/* margin-right: 20px;*/
-/*}*/
+nav a {
+    color: #306;
+}
 
-/*.product_name {*/
-/* margin-left: 90%;*/
-/* margin-top: 80%;*/
-/* display: inline;*/
-/*}*/
-
-/*.product_price {*/
-/*   color: #157DEC;*/
-/*   font-size: 15px;*/
-/*}*/
-
-/*.display-container {*/
-/*    display: flex;*/
-/*    flex-flow: row wrap;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*}*/
-
-/*.outer-flex-container {*/
-/*    display: flex;*/
-/*    flex-flow: column wrap;*/
-/*    max-width: 100%;*/
-    /*justify-content: flex-start;*/
-/*}*/
-
-/*.display-container { */
-/*  display: flex;*/
-/*  flex-flow: row wrap;*/
-  /*max-height: 800px;*/
-/*  flex-shrink: 1;*/
-  
-  /*Adjustment for the gutter*/
-/*  margin-left: -8px; */
-  /*width: 100%;*/
-/*  align-items: center;*/
-/*  justify-content: flex-start;*/
-/*}*/
-
-/*.blue-box {*/
-/*    max-width: 95%;*/
-    /*flex-basis: auto;*/
-/*    background-color: #E8FFFF;*/
-/*    margin: 0 8px 8px 0;*/
-/*    border-radius: 10px;*/
-/*}*/
-
-
-/*.display-container {*/
-/*    display: grid;*/
-/*    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));*/
-/*    grid-gap: 30px;*/
-/*    text-align: center;*/
-/*}*/
-
-
-
-
-
-
-
-
-
-
-/*.outer-flex-container {*/
-/*    display: flex;*/
-/*    flex-flow: column nowrap;*/
-/*    max-width: 100%;*/
-/*    flex-grow: 0;*/
-/*    flex-shrink: 0;*/
-/*}*/
-
-/*.display-container { */
-/*    display: flex;*/
-/*    flex-flow: row wrap;*/
-
-/*}*/
-
-/*.blue-box {*/
-/*    max-width: 95%;*/
-/*    background-color: #E8FFFF;*/
-/*    margin: 0 8px 8px 0;*/
-/*    border-radius: 10px;*/
-/*}*/
-
-
-
-
-
-
-
-/*.outer-flex-container {*/
-/*  padding: 1.5em;*/
-/*  max-width: 960px;*/
-/*  margin-right: auto;*/
-/*  margin-left: auto;*/
-/*}*/
-
-/*.display-container {*/
-/*  columns: 1;*/
-/*  column-gap: 10px;*/
-/*}*/
-
-/*.blue-box {*/
-/*  display: inline-block;*/
-/*  vertical-align: top;*/
-/*  margin-bottom: 10px;*/
-/*  background-color: #E8FFFF;*/
-/*  border-radius: 10px;*/
-/*}*/
-
-/*@media only screen and (max-width: 1023px) and (min-width: 768px) {  .display-container {*/
-/*    columns: 2;*/
-/*  }*/
-/*}*/
-
-/*@media only screen and (min-width: 1024px) {*/
-/*  .display-container {*/
-/*    columns: 8;*/
-/*  }*/
-/*}*/
-
-/*@media only screen and (min-width: 1024px) {*/
-/*  .display-container {*/
-/*    columns: 8;*/
-/*  }*/
-/*}*/
-
-
-/*.blue-box, .product-container {*/
-/*  border-radius: 4px;*/
-/*  overflow: hidden;*/
-/*}*/
-
-
-
-
-
-
-
-
-
-
-
-
+nav a:hover {
+    font-size: 1.5em;
+    transition: 1s;
+}
+         
 .outer-flex-container {
     padding: 1.5em;
     max-width: 960px;
