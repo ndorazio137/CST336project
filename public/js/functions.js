@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-    var cart = new Map();
-
     $(".add-to-cart").on("click", function(event) {
         event.preventDefault();
 

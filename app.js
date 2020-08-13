@@ -22,7 +22,12 @@ app.use(express.urlencoded({ extended: true }));
 
 //routes
 app.get("/", function(req, res) {
-   res.render("index");
+   let sql = "SELECT * FROM Products";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      //console.log(rows);
+      res.render("index", { "rows": rows });
+   });
 });
 
 app.get("/login", function(req, res) {
@@ -34,13 +39,19 @@ app.post("/login", async function(req, res) {
    let password = req.body.password;
    console.log("USERNAME: " + username);
    console.log("PASSWORD: " + password);
-   let hashedPwd = "$2a$10$AjnC509IqVfhQ06xYuOzQ.F1CSVAh7Fh4pGviPO3nd3glLvyX0Kg2";
+
+   let result = await checkUsername(username);
+   console.dir(result);
+   let hashedPwd = "";
+
+   if (result.length > 0) {
+      hashedPwd = result[0].password;
+   }
 
    let passwordMatch = await checkPassword(password, hashedPwd);
    console.log("passwordMatch: " + passwordMatch.toString());
-   //*******This is commented out for easy access to other pages while building*****//
-   //** Do not delete.It will be used ** ** ** //
-   if (username == "admin" && passwordMatch) {
+
+   if (passwordMatch) {
       req.session.authenticated = true;
       res.render("admin");
    }
@@ -60,7 +71,7 @@ function checkPassword(password, hashedValue) {
 
 function isAuthenticated(req, res, next) {
    if (!req.session.authenticated) {
-      res.redirect("account");
+      res.redirect("login");
    }
    else {
       next();
@@ -72,7 +83,7 @@ app.get("/myAccount", isAuthenticated, function(req, res) {
       res.render("account");
    }
    else {
-      res.redirect("login");
+      res.redirect("potions");
    }
 });
 
@@ -153,14 +164,13 @@ app.get("/api/addToCart", function(req, res) {
    console.log("Product price: " + req.query.product_price);
 
    let sql = "";
-   let sqlParams = [];
+   let sqlParams = [req.query.product_id, req.query.product_name, req.query.product_price];
    pool.query(sql, sqlParams, function(err, rows, fields) {
       if (err) throw err;
       console.log(rows);
    });
 
 });
-
 
 app.get("/search", function(req, res) {
 
@@ -181,7 +191,7 @@ app.get("/search", function(req, res) {
 
    // Run SQL query
    let sql = "SELECT * FROM Products WHERE type LIKE ? AND name LIKE ? AND description LIKE ?";
-   let sqlParams = ["%"+type+"%", "%"+name+"%", "%"+desc+"%"];
+   let sqlParams = ["%" + type + "%", "%" + name + "%", "%" + desc + "%"];
    pool.query(sql, sqlParams, function(err, rows, fields) {
       if (err) throw err;
       // Render search results page, passing the results of the SQL query

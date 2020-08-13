@@ -1,42 +1,16 @@
-.item {
-   display: grid;
-}
-
 .blue-box {
- background-color: #E8FFFF; 
- padding-left: 40px;
- padding-right: 40px;
- padding-top: 40px;
- padding-bottom: 40px;
+ border: 1px solid blue; 
  width: 275px;
- float: left;
- display: table;
- margin-right: 20px;
-}
-
-.product_name {
- /*margin-left: 90%;*/
- margin-top: 80%;
- display: inline;
-}
-
-.product_price {
-   color: #157DEC;
-   font-size: 15px;
+ justify-content: center;
 }
 
 .page_title {
   text-align: center;
   font-family: cursive;
-    
 }
 
 footer {
     text-align: center;
-}
-
-.display-container {
-    height: 150%;
 }
 
 /* Flaired edges, by Tomas Theunissen */
@@ -101,7 +75,7 @@ hr:before { /* Not really supposed to work, but does */
 .required_input:after {
     content:" *";
     color: red;
-  }
+}
 
 /****** Admin css ends here ********/
 
