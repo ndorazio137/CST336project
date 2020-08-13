@@ -34,64 +34,6 @@ app.get("/login", function(req, res) {
    res.render("login");
 });
 
-
-app.post("/api/signup", async function(req, res){
-   let username = req.body.username;
-   let usernameResult = await checkUsername(username);
-  
-   let email = req.body.email;
-   let emailResult = await checkEmail(email);
- 
-   if(emailResult.length > 0 && usernameResult > 0){
-      console.log("USERNAME: " + username);
-      console.log("EMAIL: " + email);
-      res.redirect("/");
-   } 
-   else if(usernameResult <= 0 && emailResult <= 0){
-         console.log("username does not exist");
-         console.log("email does not exist");
-         res.render("signup", {emailError: true};  
-   }
-   else if(usernameResult <=0) {
-         console.log("username does not exist");
-         console.log("EMAIL: " + email);
-         res.render("signup", {usernameError: true};
-   }
-});
-
-
-
-
-/**
-* Checks whether the username exists in the database.
-* if found, returns the corresponding record.
-* @param {string} username
-* @return {array of objects}
-*/
-function checkUsername(username) {
-  let sql = "SELECT * FROM Users WHERE username = ?";
-  return new Promise(function(resolve, reject){
-     pool.query(sql, [username], function (err, rows, fields) {
-        if (err) throw err;
-        console.log("checkUsername: Rows found: " + rows.length);
-        resolve(rows);
-     });//query
-  });//promise
-}
-
-function checkEmail(email) {
-  let sql = "SELECT * FROM Users WHERE email = ?";
-  return new Promise(function(resolve, reject){
-     pool.query(sql, [email], function (err, rows, fields) {
-        if (err) throw err;
-        console.log("checkEmail: Rows found: " + rows.length);
-        resolve(rows);
-     });//query
-  });//promise
-}
-
-
-
 app.post("/login", async function(req, res) {
    let username = req.body.username;
    let password = req.body.password;
