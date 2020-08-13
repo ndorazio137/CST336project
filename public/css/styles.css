@@ -6,6 +6,11 @@ body {
 nav a {
     color: #306;
 }
+
+.user-forms {
+    text-align: center;
+    /*background-color: rgba(80, 80, 80, 0.8);*/
+}
          
 .outer-flex-container {
     padding: 1.5em;
