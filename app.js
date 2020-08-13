@@ -209,7 +209,6 @@ app.get("/api/addToCart", function(req, res) {
       if (err) throw err;
       console.log(rows);
    });
-
 });
 
 app.post("/api/addProduct", function(req, res) {
@@ -220,7 +219,7 @@ app.post("/api/addProduct", function(req, res) {
       // Render search results page, passing the results of the SQL query
       console.log(rows);
       console.log(sqlParams);
-      //res.render("searchResults", { "rows": rows });
+      res.render("admin", { "rows": rows });
    });
 });
 

@@ -6,11 +6,6 @@ body {
 nav a {
     color: #306;
 }
-
-nav a:hover {
-    font-size: 1.5em;
-    transition: 1s;
-}
          
 .outer-flex-container {
     padding: 1.5em;
