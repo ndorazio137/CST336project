@@ -5,31 +5,36 @@
       a column of items. One per row -->
       <div id="shoppingCart">
             
-         <!-- checkout form -->
-         <form action="/checkout">
-   
-            <!-- A single cart item, will be changed to be dynamically 
-            created in JS. CSS will be applied to create decription and button 
-            on the same row -->
-            <div class="shopping-cart-item">
-   
-               <!-- item description -->
-               <div class="shopping-cart-text">
-                  Shopping cart item description
-               </div>
-   
-               <!-- more options need to be added here to increase/decrease 
-               item count -->
-   
-               <!-- remove item button -->
-               <div class="remove-from-cart">
-                  <button class="btn remove-cart-item-btn">
-                     <i class="fa fa-trash"></i>
-                  </button>    
-               </div>
-   
-            </div> <!-- end cart item -->
+         
             
+            <% rows.forEach(function(row){ %>
+               <div class="shopping-cart-item">
+                  <form action="/">
+                     <!-- item image -->
+                     <div class="shopping-cart-image">
+                        <img src='<%= row.imageUrl %>' width='210' alt='<%= row.imageUrl %>'>
+                     </div>
+                     
+                      <!-- more options need to be added here to increase/decrease 
+                           item count -->
+                     <div class="shopping-cart-info">
+                        <p class="shopping-cart-name"><%= row.name %><p>
+                        <p class="shopping-cart-price"><%= row.price %> Denars</p>
+                        <p class="shopping-cart-description"><%= row.description %></p>
+                     </div>
+                     
+                     <!-- remove item button -->
+                     <div class="remove-from-cart">
+                        <button class="btn remove-cart-item-btn">
+                           <i class="fa fa-trash"></i>
+                        </button>    
+                     </div>
+                  </form>
+               </div> <!-- end cart item -->
+            <% }); %>
+    
+         <!-- checkout form -->
+         <form>
             <button type="submit">Place your order</button>
          </form> <!-- end checkout form -->
    
