@@ -83,17 +83,6 @@ function getIsAdminRows(username) {
    }); //promise
 }
 
-function getIsAdminRows(username) {
-   let sql = "SELECT isAdmin FROM Users WHERE username = ?";
-   return new Promise(function(resolve, reject) {
-      pool.query(sql, [username], function(err, rows, fields) {
-         if (err) throw err;
-         console.log("getIsAdminRows: Rows found: " + rows.length);
-         resolve(rows);
-      }); //query
-   }); //promise
-}
-
 /** 
  * Checks whether the username exists in the database.
  * if found, returns the corresponding record.
