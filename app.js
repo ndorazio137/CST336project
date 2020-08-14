@@ -191,8 +191,9 @@ app.get("/shoppingcart", function(req, res) {
       " ON Products.productId = Carts.productId" +
       " JOIN Users" +
       " ON Carts.userId = Users.userId" +
-      " WHERE username = 'ko';";
-   pool.query(sql, function(err, rows, fields) {
+      " WHERE username = ?;";
+   let sqlParams = [req.session.user];
+   pool.query(sql, sqlParams, function(err, rows, fields) {
       if (err) throw err;
       console.log(rows);
       res.render("shoppingcart", { "rows": rows });
