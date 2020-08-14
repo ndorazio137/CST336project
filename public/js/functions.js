@@ -22,7 +22,7 @@ $(document).ready(function() {
             }
         }); //ajax
     });
-    
+   
     $("#updateProduct").on("click", function(event) {
         event.preventDefault();
     });
