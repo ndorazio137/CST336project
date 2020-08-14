@@ -8,7 +8,7 @@ $(document).ready(function() {
         let product_id = urlParams.get("product_id");
 
         $.ajax({
-            method: "GET",
+            method: "POST",
             url: "/api/addToCart",
             data: {
                 "product_id": product_id
