@@ -10,12 +10,12 @@ $(document).ready(function() {
         let product_price = urlParams.get("product_price");
 
         $.ajax({
-            method: "GET",
+            method: "POST",
             url: "/api/addToCart",
             data: {
                 "product_id": product_id,
-                "product_name": product_name,
-                "product_price": product_price
+                // "product_name": product_name,
+                // "product_price": product_price
             },
             success: function(data, status) {
                 console.log("Returned from addToCart AJAX");

@@ -8,7 +8,7 @@
          <!--displaying weapon products-->
          <% rows.forEach(function(row){ %>
          <div class="box blue-box product-container" id="Product_<%= row.productId %>">
-            <form action="/api/addToCart" method="GET">
+            <form action="/api/addToCart" method="POST">
             <img src='<%= row.imageUrl %>' width='210' alt='<%= row.imageUrl %>'/>
             <br />
             <h5 class="product_name"><%= row.name %></h5>
