@@ -243,7 +243,7 @@ app.get("/signup", function(req, res) {
 });
 
 app.get("/shoppingcart", function(req, res) {
-   let sql = "SELECT name, price, imageUrl, description, quantity" +
+   let sql = "SELECT Carts.productId, name, price, imageUrl, description, quantity" +
       " FROM Products" +
       " JOIN Carts" +
       " ON Products.productId = Carts.productId" +
@@ -288,13 +288,15 @@ app.get("/thankyou", function(req, res) {
    res.render("thankyou");
 });
 
-app.post("/api/removeFromCart", function(req, res) {
-   let sql = "DELETE FROM Carts WHERE userId = ? AND productId = ?";
-   let sqlParams = [req.session.userId, req.body.product_id];
-
+app.get("/api/removeFromCart", function(req, res) {
+   let sql = "DELETE FROM Carts WHERE userId=? AND productId=? LIMIT 1;";
+   let sqlParams = [req.session.userId, req.query.product_id];
+   
    pool.query(sql, sqlParams, function(err, rows, fields) {
       if (err) throw err;
-      console.log("removeFromCart: Rows deleted: " + rows.length);
+      console.log("removeFromCart: Rows deleted: ");
+      console.log(rows);
+      console.log(sqlParams);
       res.redirect("/shoppingcart");
    }); //query
 });

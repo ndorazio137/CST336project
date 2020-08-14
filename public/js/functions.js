@@ -25,7 +25,7 @@ $(document).ready(function() {
         let product_id = urlParams.get("product_id");
 
         $.ajax({
-            method: "POST",
+            method: "GET",
             url: "/api/removeFromCart",
             data: {
                 "product_id": product_id

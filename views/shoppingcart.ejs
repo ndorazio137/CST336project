@@ -7,7 +7,7 @@
          
             <% rows.forEach(function(row){ %>
                <div class="shopping-cart-item">
-                  <form action="/api/removeFromCart" method="POST">
+                  <form action="/api/removeFromCart" method="GET">
                      <!-- item image -->
                      <div class="shopping-cart-image">
                         <img src='<%= row.imageUrl %>' width='210' alt='<%= row.imageUrl %>'>
@@ -19,6 +19,7 @@
                         <p class="shopping-cart-name" name="product_name"><%= row.name %><p>
                         <p class="shopping-cart-price" name="product_price"><%= row.price %> Denars</p>
                         <p class="shopping-cart-description" name="product_description"><%= row.description %></p>
+                        <input type="hidden" name="product_id" value='<%= row.productId %>'>
                      </div>
                      
                      <!-- remove item button -->
