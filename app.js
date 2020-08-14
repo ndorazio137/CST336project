@@ -269,6 +269,17 @@ app.post("/api/deleteProduct", function(req, res) {
    });
 });
 
+function deleteProductFromCart(product_name) {
+   let sql = "SELECT FROM Products WHERE name= ?";
+   return new Promise(function(resolve, reject) {
+      pool.query(sql, [product_name], function(err, rows, fields) {
+         if (err) throw err;
+         console.log("deleteProduct: Rows found: " + rows.length);
+         resolve(rows);
+      }); //query
+   }); //promise
+}
+
 app.get("/checkout", function(req, res) {
    res.render("checkout");
 });
@@ -276,6 +287,18 @@ app.get("/checkout", function(req, res) {
 app.get("/thankyou", function(req, res) {
    res.render("thankyou");
 });
+
+app.post("/api/removeFromCart", function(req, res) {
+   let sql = "DELETE FROM Carts WHERE userId = ? AND productId = ?";
+   let sqlParams = [req.session.userId, req.body.product_id];
+
+   pool.query(sql, sqlParams, function(err, rows, fields) {
+      if (err) throw err;
+      console.log("removeFromCart: Rows deleted: " + rows.length);
+      res.redirect("/shoppingcart");
+   }); //query
+});
+
 
 // unfinished post
 app.post("/api/addToCart", async function(req, res) {
@@ -315,6 +338,7 @@ app.post("/api/addToCart", async function(req, res) {
 function isAlreadyInCart(req, productId) {
    let sql = "SELECT * FROM Carts WHERE userId = ? AND productId = ?";
    let sqlParams = [req.session.userId, productId];
+
    return new Promise(function(resolve, reject) {
       pool.query(sql, sqlParams, function(err, rows, fields) {
          if (err) throw err;
@@ -322,6 +346,7 @@ function isAlreadyInCart(req, productId) {
          resolve(rows);
       }); //query
    }); //promise
+
 }
 
 function getCurrentUserId(username) {

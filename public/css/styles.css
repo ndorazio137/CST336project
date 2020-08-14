@@ -109,7 +109,7 @@ hr:before { /* Not really supposed to work, but does */
     text-align: center;
 }
 
-.remove-cart-item-btn {
+.remove-cart-item {
     background-color: rgb(200,0,0); /*red*/
     border-radius: 25px; /*circular button*/
     color: black; /*icon color*/
@@ -117,7 +117,7 @@ hr:before { /* Not really supposed to work, but does */
     font-size: 16px;
 }
 
-.remove-cart-item-btn:hover {
+.remove-cart-item:hover {
     background-color: rgb(175,0,0); /*darker red*/
     color: black; /*icon color*/
 }
