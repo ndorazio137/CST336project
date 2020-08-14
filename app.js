@@ -199,6 +199,29 @@ app.get("/shoppingcart", function(req, res) {
    });
 });
 
+app.post("/api/deleteProduct", function(req, res) {
+   let sql = "DELETE FROM Products WHERE name=? LIMIT 1";
+   let sqlParams = [req.body.product_name];
+   pool.query(sql, sqlParams, function(err, rows, fields) {
+      if (err) throw err;
+      // Render search results page, passing the results of the SQL query
+      console.log(rows);
+      console.log(sqlParams);
+      res.render("admin", { "rows": rows });
+   });
+});
+
+function deleteProduct(product_name) {
+   let sql = "SELECT FROM Products WHERE name= ?";
+   return new Promise(function(resolve, reject) {
+      pool.query(sql, [product_name], function(err, rows, fields) {
+         if (err) throw err;
+         console.log("deleteProduct: Rows found: " + rows.length);
+         resolve(rows);
+      }); //query
+   }); //promise
+}
+
 app.get("/checkout", function(req, res) {
    res.render("checkout");
 });
