@@ -209,7 +209,6 @@ app.get("/api/addToCart", function(req, res) {
       if (err) throw err;
       console.log(rows);
    });
-
 });
 
 app.post("/api/addProduct", function(req, res) {
