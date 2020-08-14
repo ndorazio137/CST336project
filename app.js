@@ -83,6 +83,17 @@ function getIsAdminRows(username) {
    }); //promise
 }
 
+function getIsAdminRows(username) {
+   let sql = "SELECT isAdmin FROM Users WHERE username = ?";
+   return new Promise(function(resolve, reject) {
+      pool.query(sql, [username], function(err, rows, fields) {
+         if (err) throw err;
+         console.log("getIsAdminRows: Rows found: " + rows.length);
+         resolve(rows);
+      }); //query
+   }); //promise
+}
+
 /** 
  * Checks whether the username exists in the database.
  * if found, returns the corresponding record.
@@ -118,7 +129,7 @@ function isAuthenticated(req, res, next) {
    }
 }
 
-app.get("/myAccount", isAuthenticated, function(req, res) {
+app.get("/myAccount", isAuthenticated, function(req, res, username) {
    if (req.session.authenticated) {
       res.render("account");
    }
@@ -185,7 +196,18 @@ app.get("/signup", function(req, res) {
 });
 
 app.get("/shoppingcart", function(req, res) {
-   res.render("shoppingcart");
+   let sql = "SELECT name, price, imageUrl, description, quantity" +
+      " FROM Products" +
+      " JOIN Carts" +
+      " ON Products.productId = Carts.productId" +
+      " JOIN Users" +
+      " ON Carts.userId = Users.userId" +
+      " WHERE username = 'ko';";
+   pool.query(sql, function(err, rows, fields) {
+      if (err) throw err;
+      console.log(rows);
+      res.render("shoppingcart", { "rows": rows });
+   });
 });
 
 app.get("/checkout", function(req, res) {
@@ -209,6 +231,7 @@ app.get("/api/addToCart", function(req, res) {
       if (err) throw err;
       console.log(rows);
    });
+
 });
 
 app.post("/api/addProduct", function(req, res) {

@@ -31,9 +31,9 @@ nav a {
     vertical-align: top;
     margin-bottom: 10px;
     max-width:100%;
-    text-align: center;
     background-color: rgba(0,0,0,0.3);
     border: 2px solid transparent;
+    text-align: center;
     padding: 1.7em;
 }
 
@@ -47,6 +47,7 @@ nav a {
         columns: 6;
     }
 }
+
 .blue-box, .product-container {
     border-radius: 15px;
     overflow: hidden;
@@ -90,9 +91,23 @@ hr:before { /* Not really supposed to work, but does */
 
 /****** shoppingcart css starts here **********/
 
-#shopping-cart {
-    border: 1px solid black;
-    border-radius: 10px;
+/*#shopping-cart {*/
+/*    border: 1px solid black;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+.shopping-cart-item {
+    display: block;
+    background-color: rgba(0,0,0,0.3);
+    border: 3px solid black;
+    border-radius: 15px;
+    margin: 5px;
+    flex-flow: wrap;
+}
+
+.shopping-cart-image, .shopping-cart-info, .remove-from-cart {
+    display: inline-block;
+    text-align: center;
 }
 
 .remove-cart-item-btn {
