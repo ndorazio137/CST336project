@@ -71,10 +71,19 @@
          <br />
          <br />
          <!-- submit form -->
-         <input class="btn btn-primary btn-lg" type="submit"/>
+         <input id="updateProduct" class="btn btn-primary btn-lg" type="submit"/>
       </form> <!-- admin update item form ends here -->
    </div> <!-- admin update item container ends here -->
-   <div id="productUpdate"></div>
+   <div id="productUpdate">
+      
+      <!-- product update error: product not found -->
+            <% if (typeof productUpdateError != "undefined" && productUpdateError) { %>
+               <h3 class="error"> No existing products found with that name.
+                  Please add the product or try a different name.
+               </h3>
+            <% }%>
+      
+   </div>
    <br />
    <br />
    <br />
