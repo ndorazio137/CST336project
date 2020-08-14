@@ -268,6 +268,17 @@ app.post("/api/deleteProduct", function(req, res) {
    });
 });
 
+function deleteProductFromCart(product_name) {
+   let sql = "SELECT FROM Products WHERE name= ?";
+   return new Promise(function(resolve, reject) {
+      pool.query(sql, [product_name], function(err, rows, fields) {
+         if (err) throw err;
+         console.log("deleteProduct: Rows found: " + rows.length);
+         resolve(rows);
+      }); //query
+   }); //promise
+}
+
 app.get("/checkout", function(req, res) {
    res.render("checkout");
 });
@@ -276,6 +287,18 @@ app.get("/thankyou", function(req, res) {
    res.render("thankyou");
 });
 
+app.post("/api/removeFromCart", function(req, res) {
+   let sql = "DELETE FROM Carts WHERE userId = ? AND productId = ?";
+   let sqlParams = [req.session.userId, req.body.product_id];
+
+   pool.query(sql, sqlParams, function(err, rows, fields) {
+      if (err) throw err;
+      console.log("removeFromCart: Rows deleted: " + rows.length);
+      res.redirect("/shoppingcart");
+   }); //query
+});
+
+
 // unfinished post
 app.get("/api/addToCart", function(req, res) {
    console.log("From URL: ");
@@ -283,12 +306,16 @@ app.get("/api/addToCart", function(req, res) {
    console.log("Product name: " + req.query.product_name);
    console.log("Product price: " + req.query.product_price);
 
-   let sql = "SELECT * FROM Products WHERE productId = ? AND name = ? AND price = ?";
+   let sql = "INSERT INTO WHERE productId = ? AND name = ? AND price = ?";
    let sqlParams = [req.query.product_id, req.query.product_name, req.query.product_price];
-   pool.query(sql, sqlParams, function(err, rows, fields) {
-      if (err) throw err;
-      console.log(rows);
-   });
+
+   return new Promise(function(resolve, reject) {
+      pool.query(sql, sqlParams, function(err, rows, fields) {
+         if (err) throw err;
+         console.log("getProduct: Rows found: " + rows.length);
+         resolve(rows);
+      }); //query
+   }); //promise
 
 });
 
@@ -374,30 +401,6 @@ function updateProduct(req, product) {
       pool.query(sql, sqlParams, function(err, rows, fields) {
          if (err) throw err;
          console.log("updateProduct: Rows found: " + rows.length);
-         resolve(rows);
-      }); //query
-   }); //promise
-}
-
-
-app.post("/api/deleteProduct", function(req, res) {
-   let sql = "DELETE FROM Products WHERE name=? LIMIT 1";
-   let sqlParams = [req.body.product_name];
-   pool.query(sql, sqlParams, function(err, rows, fields) {
-      if (err) throw err;
-      // Render search results page, passing the results of the SQL query
-      console.log(rows);
-      console.log(sqlParams);
-      res.render("admin", { "rows": rows });
-   });
-});
-
-function deleteProduct(product_name) {
-   let sql = "SELECT FROM Products WHERE name= ?";
-   return new Promise(function(resolve, reject) {
-      pool.query(sql, [product_name], function(err, rows, fields) {
-         if (err) throw err;
-         console.log("deleteProduct: Rows found: " + rows.length);
          resolve(rows);
       }); //query
    }); //promise

@@ -4,12 +4,10 @@
       <!-- the shopping cart list of items. CSS will be applied to create
       a column of items. One per row -->
       <div id="shoppingCart">
-            
          
-            
             <% rows.forEach(function(row){ %>
                <div class="shopping-cart-item">
-                  <form action="/">
+                  <form action="/api/removeFromCart" method="POST">
                      <!-- item image -->
                      <div class="shopping-cart-image">
                         <img src='<%= row.imageUrl %>' width='210' alt='<%= row.imageUrl %>'>
@@ -18,14 +16,14 @@
                       <!-- more options need to be added here to increase/decrease 
                            item count -->
                      <div class="shopping-cart-info">
-                        <p class="shopping-cart-name"><%= row.name %><p>
-                        <p class="shopping-cart-price"><%= row.price %> Denars</p>
-                        <p class="shopping-cart-description"><%= row.description %></p>
+                        <p class="shopping-cart-name" name="product_name"><%= row.name %><p>
+                        <p class="shopping-cart-price" name="product_price"><%= row.price %> Denars</p>
+                        <p class="shopping-cart-description" name="product_description"><%= row.description %></p>
                      </div>
                      
                      <!-- remove item button -->
                      <div class="remove-from-cart">
-                        <button class="btn remove-cart-item-btn">
+                        <button class="btn remove-cart-item">
                            <i class="fa fa-trash"></i>
                         </button>    
                      </div>
