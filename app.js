@@ -14,7 +14,12 @@ app.use(express.static("public"));
 app.use(session({
    secret: "top secret!",
    resave: true,
-   saveUninitialized: true
+   saveUninitialized: true,
+   duration: 30 * 60 * 1000,
+   activeDuration: 5 * 60 * 1000,
+   httpOnly: true,
+   secure: true,
+   ephemeral: true
 }));
 
 //to be able to parse POST
@@ -60,10 +65,12 @@ app.post("/login", async function(req, res) {
    console.log("passwordMatch: " + passwordMatch.toString());
    if (isAdmin && passwordMatch) {
       req.session.authenticated = true;
+      req.session.user = username;
       res.render("admin");
    }
    else if (passwordMatch) {
       req.session.authenticated = true;
+      req.session.user = username;
       res.render("account");
    }
    else {
@@ -83,6 +90,32 @@ function getIsAdminRows(username) {
    }); //promise
 }
 
+
+app.post("/api/signup", async function(req, res){
+   let username = req.body.username;
+   let usernameResult = await checkUsername(username);
+  
+   let email = req.body.email;
+   let emailResult = await checkEmail(email);
+ 
+   if(emailResult.length > 0 && usernameResult > 0){
+      console.log("USERNAME: " + username);
+      console.log("EMAIL: " + email);
+      res.redirect("/");
+   } 
+   else if(usernameResult <= 0 && emailResult <= 0){
+         console.log("username does not exist");
+         console.log("email does not exist");
+         res.render("signup", {emailError: true});  
+   }
+   else if(usernameResult <=0) {
+         console.log("username does not exist");
+         console.log("EMAIL: " + email);
+         res.render("signup", {usernameError: true});
+   }
+});
+
+
 /** 
  * Checks whether the username exists in the database.
  * if found, returns the corresponding record.
@@ -99,6 +132,18 @@ function checkUsername(username) {
       }); //query
    }); //promise
 }
+
+function checkEmail(email) {
+  let sql = "SELECT * FROM Users WHERE email = ?";
+  return new Promise(function(resolve, reject){
+     pool.query(sql, [email], function (err, rows, fields) {
+        if (err) throw err;
+        console.log("checkEmail: Rows found: " + rows.length);
+        resolve(rows);
+     });//query
+  });//promise
+}
+
 
 function checkPassword(password, hashedValue) {
    return new Promise(function(resolve, reject) {
@@ -118,8 +163,19 @@ function isAuthenticated(req, res, next) {
    }
 }
 
-app.get("/myAccount", isAuthenticated, function(req, res, username) {
-   if (req.session.authenticated) {
+app.get("/myAccount", isAuthenticated, async function(req, res) {
+   let adminRows;
+   adminRows = await getIsAdminRows(req.session.user);
+   let isAdmin = 0;
+   
+   if (adminRows.length > 0) {
+      isAdmin = adminRows[0].isAdmin;
+   }
+   
+   if (req.session.authenticated && isAdmin) {
+      res.render("admin");
+   }
+   else if  (req.session.authenticated && !isAdmin) {
       res.render("account");
    }
    else {
@@ -258,6 +314,105 @@ app.post("/api/addProduct", function(req, res) {
       res.render("admin", { "rows": rows });
    });
 });
+
+app.post("/api/updateProduct", async function(req, res) {
+   let productRows;
+   productRows = await getProduct(req.body.product_name);
+   
+   if (productRows.length == 0) {
+      // no existing product found...
+      console.log("Product " + req.body.product_name + " not found.");
+      res.render("admin", { "productUpdateError": true });
+   }
+   
+   let product = [];
+   product = productRows[0];
+   
+   let updateResults;
+   updateResults = await updateProduct(req, product);
+   
+   console.log("Update returned...");
+   console.log(updateResults);
+   
+   res.render("admin", {"rows": updateResults.changedRows});
+});
+
+function getProduct(product_name) {
+   let sql = "SELECT name, type, price, description, imageUrl, "
+      + "numberInStock FROM Products WHERE name = ?";
+   let sqlParams = [product_name];
+   
+   return new Promise(function(resolve, reject) {
+      pool.query(sql, sqlParams, function(err, rows, fields) {
+         if (err) throw err;
+         console.log("getProduct: Rows found: " + rows.length);
+         resolve(rows);
+      }); //query
+   }); //promise
+}
+
+function updateProduct(req, product) {
+   let sql = "UPDATE Products "
+      + "SET type = ?, price = ?, description = ?, imageUrl = ?, numberInStock = ? "
+      + "WHERE name = ? LIMIT 1";
+   
+   let product_name = product.name;
+   let product_category = product.type;
+   let product_price = product.price;
+   let product_description = product.description;
+   let product_image = product.imageUrl;
+   let product_quantity = product.numberInStock;
+   
+   if (req.body.product_category != "") {
+      product_category = req.body.product_category
+   }
+   if (req.body.product_price != "") {
+      product_price = req.body.product_price
+   }
+   if (req.body.product_description != "") {
+      product_description = req.body.product_description
+   }
+   if (req.body.product_image != "") {
+      product_image = req.body.product_image
+   }
+   if (req.body.product_quantity != "") {
+      product_quantity = req.body.product_quantity
+   }
+   
+   let sqlParams = [product_category, product_price, product_description, product_image, product_quantity, product_name];
+   
+   return new Promise(function(resolve, reject) {
+      pool.query(sql, sqlParams, function(err, rows, fields) {
+         if (err) throw err;
+         console.log("updateProduct: Rows found: " + rows.length);
+         resolve(rows);
+      }); //query
+   }); //promise
+}
+
+
+app.post("/api/deleteProduct", function(req, res) {
+  let sql = "DELETE FROM Products WHERE name=? LIMIT 1";
+  let sqlParams = [req.body.product_name];
+  pool.query(sql, sqlParams, function(err, rows, fields) {
+     if (err) throw err;
+     // Render search results page, passing the results of the SQL query
+     console.log(rows);
+     console.log(sqlParams);
+     res.render("admin", { "rows": rows });
+  });
+});
+
+function deleteProduct(product_name) {
+  let sql = "SELECT FROM Products WHERE name= ?";
+  return new Promise(function(resolve, reject) {
+     pool.query(sql, [product_name], function(err, rows, fields) {
+        if (err) throw err;
+        console.log("deleteProduct: Rows found: " + rows.length);
+        resolve(rows);
+     }); //query
+  }); //promise
+}
 
 app.get("/search", function(req, res) {
 
